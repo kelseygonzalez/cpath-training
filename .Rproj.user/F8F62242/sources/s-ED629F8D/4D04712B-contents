@@ -1,0 +1,1404 @@
+---
+title: "C-Path R Training"
+subtitle: "Advanced Data Wrangling Part I"
+session: "01"
+author: "Kelsey Gonzalez"
+date: "May 26, 2021 &#8212; Day 1"
+output:
+  xaringan::moon_reader:
+    css: 
+      - default
+      - css/mytheme.css
+      - css/mytheme-fonts.css
+    lib_dir: libs
+    seal: false
+    # includes:
+    #   after_body: "libs/typed.js"
+    self_contained: false
+    nature:
+      highlightStyle: googlecode
+      highlightLines: true
+      highlightLanguage: ["r"]
+      countIncrementalSlides: false
+      ratio: 16:9
+      #ratio: 191:100
+      beforeInit: "macros.js"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+```{r setup, include = FALSE}
+options(htmltools.dir.version = FALSE)
+library(knitr)
+library(tidyverse)
+library(xaringanExtra)
+library(countdown)
+library(nhsrtheme)
+library(NHANES)
+library(flair)
+library(icons)
+library(kableExtra)
+library(flipbookr)
+# set default options
+opts_chunk$set(echo=FALSE,
+               collapse = TRUE,
+               fig.width = 7.252,
+               fig.height = 4,
+               dpi = 300)
+
+# set engines
+knitr::knit_engines$set("markdown")
+xaringanExtra::use_panelset()
+xaringanExtra::use_tile_view()
+xaringanExtra::use_clipboard()
+xaringanExtra::use_share_again()
+
+hexes <- function(x) {
+  x <- rev(sort(x))
+  markup <- function(pkg) glue::glue('<img src="img/{pkg}.png" class="title-hex">')
+  res <- purrr::map_chr(x, markup)
+  paste0(res, collapse = "")
+}
+```
+
+class: title-slide, center, center
+
+# `r rmarkdown::metadata$title`
+### `r rmarkdown::metadata$subtitle`
+
+**`r rmarkdown::metadata$author`**<br>
+`r rmarkdown::metadata$date`
+
+---
+name: about-me
+layout: false
+class: about-me-slide, inverse, middle, center
+
+# About me
+
+<img src="https://kelseygonzalez.github.io/author/kelsey-e.-gonzalez/avatar.png" class="rounded"/>
+
+## Kelsey Gonzalez
+
+.fade[University of Arizona<br>IBM]
+
+[`r icons::fontawesome("link")` kelseygonzalez.github.io](https://kelseygonzalez.github.io/)
+[`r icons::fontawesome("twitter")` @KelseyEGonzalez](https://twitter.com/kelseyegonzalez)
+[`r icons::icon_style(icons::fontawesome("github"), scale = 1)` @KelseyGonzalez](https://github.com/KelseyGonzalez)
+
+---
+layout: true
+
+<!-- <a class="footer-link" href="http://bit.ly/cpath-wrangling">http://bit.ly/cpath-wrangling &mdash; Kelsey Gonzalez</a> -->
+
+<!-- this adds the link footer to all slides, depends on footer-link class in css-->
+
+---
+class: left
+
+# About you
+
+--
+
+.pull-left-narrow[
+.center[`r icons::icon_style(icons::fontawesome("r-project"), scale = 2)`]]
+.pull-right-wide[### you know R]
+
+--
+
+.pull-left-narrow[.center[
+<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyverse.png" width="25%"/>]]
+.pull-right-wide[### you know some basic tidyverse]
+
+--
+
+.pull-left-narrow[
+.center[`r icons::icon_style(icons::fontawesome("medal"), scale = 2)`]]
+.pull-right-wide[### .my-gold[**you want to master data wrangling**]] 
+
+
+---
+# Learning Objectives
+
+- Describe data frames in R and tidyverse tibbles
+- Use basic functions of dplyr to manipulate single data frames/tibbles by rows, by columns (variables), and by groups
+  + Choose columns (variables) by names `select()`
+  + Choose rows by column (variable) values `filter()`
+  + Arrange (sort) rows by column (variable) values: `arrange()`
+  + Rename columns (variables): `rename()`
+  + Add/modify new/existing columns (variables): `mutate()` 
+  + Group rows by columns (variables): `group_by()`
+  + Calculate summary statistics of Columns with or without grouping. `summarize()`, `group_by()`
+- Describe tidy data
+- Make your data tidy with `pivot_longer()`, `pivot_wider()`, `separate()`, and `unite()`.
+
+---
+# Why become a data wrangling master?
+
+Real world data is always messy to start
++ Variables may be missing
++ Values may be missing 
++ There can be duplicate rows
++ Variables may have different names in different tables for the same attribute
++ Numbers can be stored as characters
++ The data may be structured for ease of human input rather than analysis
++ Unsorted or sorted in a different order than we want  
+
+---
+
+# Our Data
+----
+We will use the US National Health and Nutrition Examination Study for this workshop
+
+```{r data, echo=TRUE}
+NHANES::NHANESraw %>% head()
+```
+
+---
+# Our Data
+----
+This dataset has 78 columns, but here are some that we will be using:
+
+- `Weight` - Weight in kg
+- `Pulse` - 60 second pulse rate
+- `BPDiaAve` -  Combined diastolic blood pressure reading, following the procedure outlined for BPXDAR
+- `DirectChol` - Direct HDL cholesterol in mmol/L. Reported for participants aged 6 years or older.
+- `Diabetes` - Study participant told by a doctor or health professional that they have diabetes. Reported for participants aged 1 year or older as Yes or No.
+- `HealthGen` - Self-reported rating of participant's health in general Reported for participants aged 12 years or older. One of _Excellent_, _Vgood_, _Good_, _Fair_, or _Poor_.
+- `SleepHrsNight` - Self-reported number of hours study participant usually gets at night on weekdays or workdays. Reported for participants aged 16 years and older.
+
+---
+# Our Data, continued
+----
+
+- `PhysActiveDays` - Number of days in a typical week that participant does moderate or vigorous-intensity activity. Reported for participants 12 years or older.
+- `AlcoholDay` - Average number of drinks consumed on days that participant drank alcoholic beverages. Reported for participants aged 18 years or older.
+- `Smoke100` - Study participant has smoked at least 100 cigarettes in their entire life. Reported for participants aged 20 years or older as _Yes_ or _No_.
+- `Marijuana` Participant has tried marijuana. Reported for participants aged 18 to 59 years as  _Yes_ or _No_.
+
+To see more descriptions, type `?NHANES` in the console
+---
+
+# Glimpse  `r I(hexes(c("dplyr")))`
+`Glimpse` gives us a quick outline of what variables are in our data. 
+```{r glimpse}
+glimpse(NHANES::NHANESraw)
+```
+
+---
+
+name: live-coding
+background-color: var(--my-yellow)
+class: middle, center
+
+`r icons::icon_style(icons::fontawesome("code"), scale = 3, color = "#122140")`<br>
+# Let's try it live together
+
+
+---
+
+name: question
+class: inverse, middle, center
+
+{{content}}
+
+---
+template: question
+
+<img src="img/tidyverse.png" width="25%"/>
+# How do we wrangle our data?
+
+---
+
+# dplyr `r I(hexes(c("dplyr")))`
+
+The tidyverse `dplyr` package provides tools to *speed up the manipulation of data*
+  + Uses data frames to create consistent structure
+  + Uses the forward pipe operator, `%>%`, to facilitate transparency/readability
+  + Enables faster Exploratory Data Analysis (EDA) with `ggplot2`
+
+---
+# Select `r I(hexes(c("dplyr")))`
+----
+Choose which **columns** to keep or remove
+.pull-left[
+To select columns of a data frame, use `select()`. The `select()` function
+extracts (subsets) variables (columns) and place them into a new smaller
+(temporary) data frame. The first argument to this function is the data frame
+(`penguins`), and the subsequent arguments are the columns to keep.
+]
+.pull-right[
+```{r select-dummy, eval = FALSE, echo = TRUE}
+select(DATASET, 
+     columns to keep) 
+
+select(DATASET, 
+      -c(columns to remove)) 
+```
+]
+
+
+---
+# Select `r I(hexes(c("dplyr")))`
+----
+
+.pull-left[
+```{r select-example-1, eval=FALSE, echo = TRUE}
+select(NHANES::NHANESraw, 
+       ID, Gender, Age, Race1) 
+```
+]
+<!-- ref.label="select-example-1", -->
+.pull-right[
+```{r select-example-1-out,  echo=FALSE}
+select(NHANES::NHANESraw, 
+       ID, Gender, Age, Race1) %>% 
+  head() %>%
+  kable()
+```
+]
+
+
+
+---
+# Select Helpers `r I(hexes(c("dplyr")))`
+----
+- There are several "helper functions" you can use as arguments inside `select()`
+  + These helper functions are actually part of the tidyselect package that is always installed and loaded with dplyr
+  + See help for "language" from tidyselect or help on "starts_with" from tidyselect
+- These helper functions reduce the need to specify each and every variable you want or don't want. 
+  + Some data frames may have 1000s of variables in them
+- Variables names in a data frame are always character strings so the helper functions compare the variable names to the character patterns you provide.
+
+---
+
+
+# Select Helpers `r I(hexes(c("dplyr")))`
+----
+
+.panelset[
+.panel[.panel-name[starts_with]
+.pull-left[
+ - `starts_with("abc")`: matches names that begin with `"abc"`.
+```{r starts-with, eval = F, echo=T}
+select(NHANES::NHANESraw,
+       starts_with("BMI")) 
+```
+]<!-- end pull-left -->
+
+.pull-right[
+```{r starts-with-out, echo=F, eval = T}
+
+select(NHANES::NHANESraw,
+       starts_with("BMI")) %>% 
+  head() %>% 
+  kable()
+```
+] <!-- end pull-right -->
+] <!-- end panel -->
+.panel[.panel-name[ends_with]
+.pull-left[
+- `ends_with("xyz")`: matches names that end with `"xyz"`.
+
+```{r ends-with, eval = F, echo=T}
+select(NHANES::NHANESraw,
+    ends_with("Ave"))
+```
+]<!-- end pull-left -->
+.pull-right[
+```{r ends-with-out, echo=F, eval = T}
+
+select(NHANES::NHANESraw,
+    ends_with("Ave")) %>% 
+  head() %>% 
+  kable()
+```
+] <!-- end pull-right -->
+] <!-- end panel -->
+.panel[.panel-name[contains]
+.pull-left[
+- `contains("ijk")`: matches names that contain `"ijk"`.
+
+```{r contains, eval = F, echo=T}
+select(NHANES::NHANESraw,
+      contains("Active"), ID)
+```
+]<!-- end pull-left -->
+
+.pull-right[
+```{r contains-out, echo=FALSE}
+select(NHANES::NHANESraw,
+      contains("Active"), ID)  %>% 
+  head() %>% 
+  kable()
+```
+] <!-- end pull-right -->
+] <!-- end panel -->
+
+.panel[.panel-name[more]
+
+- `matches("(.)\\1")`: selects variables that match a *regular expression* (REGEX).
+    + This one matches any variables with two repeated characters, e.g., "YY".
+    + You'll learn more about regular expressions in the class on strings and stringr.
+
+- `num_range("x", 1:3)`: matches `x1`, `x2`, and `x3` for whatever numerical sequence you provide
+    + This can be useful for data sets with variables such as month1, month2, month3 ..., or FY18, FY19, FY20, ....
+] <!-- end panel -->
+
+] <!-- end panelset -->
+
+
+---
+
+template: live-coding
+
+---
+
+name: your-turn
+background-color: var(--my-red)
+class: inverse
+
+.left-column[
+## Your turn<br>`r icons::fontawesome("edit")`<br>
+
+
+]
+
+.right-column[
+### Select some variables you would potentially like to work with
+----
+
+Think about which variables you may want to work with, <br>using `?NHANES` to help guide you. 
+
+Here are some options to consider
+- Can you select which variables you'd like?
+- Can you deselect the variables you don't like? 
+- Can you use a tidy selection helpers?
+- Can you combine two of the above techniques together? 
+]
+```{r count1}
+countdown::countdown(minutes = 3, second = 0, 
+                     update_every = 15,
+                     left = 0, #position
+  # Set timer theme to match solarized colors
+  color_border              = "white",
+  color_text                = "white",
+  color_running_background  = "#003087",
+  color_running_text        = "white",
+  color_finished_background = "#0072CE",
+  color_finished_text       = "white",)
+```
+---
+# Filter `r I(hexes(c("dplyr")))`
+----
+
+
+Choose **Rows** Based on Values of Certain Variables
+
+.pull-left[
+- The dplyr `filter()` function allows us to choose (subset/extract) only certain rows (observations) based on the values of the variables in those rows.
+  
+- We create conditions and `filter()` selects the rows satisfying these conditions (return `TRUE`).
+- We can use logical comparisons, and use AND (`&`) or OR (`|`) as well 
+]
+.pull-right[
+```{r filter-dummy, eval = FALSE, echo = TRUE}
+filter(DATASET, 
+       column == "condition")
+```
+]
+
+---
+
+# Filter `r I(hexes(c("dplyr")))`
+----
+The filter function works with most boolean operators, namely:
+
+```{r filters, echo = F, eval = T}
+tribble(
+  ~Operator, ~Description,
+  "<","less than",   
+  "<=","less than or equal to",  
+  ">","greater than",  
+  ">=","greater than or equal to",  
+  "==","exactly equal to",  
+  "!=","not equal to",  
+  "!x","Not x",  
+  "x | y","x OR y",  
+  "x & y","x AND y") %>% 
+  kbl() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
+
+---
+
+template: live-coding
+
+---
+name: your-turn
+background-color: var(--my-red)
+class: inverse
+.left-column[
+## Your turn<br>`r icons::fontawesome("edit")`<br>
+]
+.right-column[
+### Let's filter our dataset based on some conditions
+----
+
+Here are some options to attempt: Can you only show the rows...
+- Where `Weight` is greater than 65? 
+- Where the individual does not have `Diabetes`? 
+- Where `SmokeNow` is missing? not missing? 
+- Can you combine the above filters together? 
+]
+```{r count2}
+countdown::countdown(minutes = 3, second = 0, 
+                     update_every = 15,
+                     left = 0 #position
+                     )
+```
+
+
+---
+
+
+
+# The Pipe `r I(hexes(c("pipe")))`
+
+----
+
+What if you want to select and filter at the same time? There are three ways to do this: use intermediate steps, nested functions, or pipes.
+
+With intermediate steps, you create a temporary data frame and use that as input to the next function, like this:
+
+```{r intermediatesteps, echo = TRUE, eval = FALSE }
+nhanes_steps <- filter(NHANES::NHANESraw, Weight > 65)
+nhanes_steps <- select(nhanes_steps, Weight, Diabetes, SmokeNow)
+```
+
+This is readable, but can clutter up your workspace with lots of objects that you have to name individually. With multiple steps, that can be hard to keep track of.
+
+---
+
+# The Pipe `r I(hexes(c("pipe")))`
+
+----
+
+You can also nest functions (i.e. one function inside of another), like this:
+
+```{r nest, echo = TRUE, eval = FALSE }
+nhanes_nested <- 
+  select(filter(NHANES::NHANESraw,Weight > 65), 
+         Weight, Diabetes, SmokeNow)
+```
+
+This is handy, but can be difficult to read if too many functions are nested, as R evaluates the expression from the inside out (in this case, filtering, then selecting).
+
+---
+# The Pipe `r I(hexes(c("pipe")))`
+
+----
+
+The last option, *pipes*, are a powerful addition to R. Pipes let you take the output of one function and send it directly to the next, which is useful when you need to do many things to the same dataset. Pipes in R look like `%>%` and are made available via the **`magrittr`** package, installed automatically with **`dplyr`**. 
+
+If you use RStudio, you can type the pipe with <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> if you have a PC or <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> if you have a Mac.
+
+```{r pipe, eval = FALSE}
+NHANES::NHANESraw  %>%
+    filter(Weight > 65) %>%
+    select(Weight, Diabetes, SmokeNow)
+```
+???
+In the above code, we use the pipe to send the `penguins` dataset first through `filter()` to keep rows where `island` is "Biscoe", then through `select()` to keep only the `species`, `body_mass_g`,and `sex` columns. Since `%>%` takes the object on its left and passes it as the first argument to the function on its right, we don't need to explicitly include the data frame as an argument to the `filter()` and `select()` functions any more.
+
+Some may find it helpful to read the pipe like the word "then". For instance, in the above example, we take the data frame `penguins`, *then* we `filter` for rows with `island == "Biscoe"`, *then* we `select` columns `species`, `body_mass_g`,and `sex`. The **`dplyr`** functions by themselves are somewhat simple, but by combining them into linear workflows with the pipe, we can accomplish more complex manipulations of data frames.
+
+Let's see what this looks like.. 
+---
+```{r pipe-example, include = F}
+NHANES::NHANESraw %>%  #BREAK
+    filter(Weight > 65) %>% #BREAK
+    select(Weight, 
+           Diabetes, 
+           SmokeNow) #BREAK
+```
+
+`r chunk_reveal("pipe-example", break_type = "user")`
+
+---
+name: your-turn
+background-color: var(--my-red)
+class: inverse
+.left-column[
+## Your turn<br>`r icons::fontawesome("edit")`<br>
+]
+.right-column[
+### Let's filter and select variables in our dataset
+----
+
+Using pipes, show the columns for `ID`, `Smoke100` and `SleepHrsNight` for respondents who have an average of 2 or more drinks year day when they consume alcohol (`AlcoholDay`) and who has consumed more than 100 cigarettes in their life (`Smoke100`)
+
+Save this to a new data frame. How many rows and columns does it have?
+
+]
+```{r count3}
+countdown::countdown(minutes = 4, second = 0, 
+                     update_every = 15,
+                     left = 0 #position
+                     )
+```
+
+---
+```{r piped-2, include = FALSE}
+NHANES::NHANESraw %>% 
+    filter(AlcoholDay >= 2,
+           Smoke100 == "Yes") %>% 
+  select(ID, Smoke100, SleepHrsNight)
+```
+
+`r chunk_reveal("piped-2")`
+
+---
+
+# Arrange `r I(hexes(c("dplyr")))`
+----
+
+
+
+.panelset[
+.panel[.panel-name[Arrange]
+Rearrange the Order of the Rows
+- Use `arrange()` to order rows by the value of one or more variables.
+] <!-- end panel -->
+
+.panel[.panel-name[Ascending]
+
+.pull-left[
+The **default is to arrange in ascending order** from top to bottom so the lowest number is on top. 
+
+```{r arrange, eval = F, echo=T}
+NHANES::NHANESraw %>% 
+    arrange(SleepHrsNight) 
+```
+]<!-- end pull-left -->
+
+.pull-right[
+```{r arrange-out, echo=F, eval = T}
+NHANES::NHANESraw %>% 
+    arrange(SleepHrsNight) %>% 
+  head() %>% 
+  kable()
+```
+] <!-- end pull-right -->
+] <!-- end panel -->
+
+.panel[.panel-name[Descending]
+
+.pull-left[
+The **default is to arrange in ascending order** from top to bottom so the lowest number is on top. 
+
+```{r arrange-desc1, eval = F, echo=T}
+NHANES::NHANESraw %>% 
+    arrange(-SleepHrsNight) 
+```
+or
+```{r arrange-desc2, eval = F, echo=T}
+NHANES::NHANESraw %>% 
+    arrange(desc(SleepHrsNight)) 
+```
+]<!-- end pull-left -->
+
+.pull-right[
+```{r arrange-desc-out, echo=F, eval = T}
+NHANES::NHANESraw %>% 
+    arrange(-SleepHrsNight) %>% 
+  head() %>% 
+  kable()
+```
+] <!-- end pull-right -->
+] <!-- end panel -->
+] <!-- end panelset -->
+
+---
+
+# Renaming variables `r I(hexes(c("dplyr, janitor")))`
+
+.panelset[
+
+.panel[.panel-name[rename]
+Using the rename function:
+```{r rename1, eval = F, echo = T}
+NHANES::NHANESraw %>% 
+  select(Weight, Height, BMI) %>% 
+  rename(weight = Weight, 
+         height = Height, 
+         bmi = BMI)
+```
+]<!--  end panel -->
+
+.panel[.panel-name[select]
+Another alternative is to rename columns in the the select function itself:
+```{r rename2, eval = F, echo=T}
+NHANES::NHANESraw %>% 
+  select(weight = Weight, 
+         height = Height, 
+         bmi = BMI, 
+         ID)
+```
+] <!--  end panel -->
+
+.panel[.panel-name[janitor]
+Finally, there is an extremely popular package called `janitor` that enables fast cleaning of all variable names:
+
+.pull-left[
+```{r rename3, eval = F, echo=T}
+install.packages("janitor")
+library(janitor)
+NHANES::NHANESraw %>% 
+  clean_names()
+```
+]<!-- end pull-left -->
+.pull-right[
+original names:
+```
+ID SurveyYr Gender Age AgeMonths Race1 Race3 Education MaritalStatus HHIncome HHIncomeMid Poverty HomeRooms HomeOwn Work Weight Length HeadCirc Height BMI
+```
+
+cleaned names:
+```
+id survey_yr gender age age_months race1 race3 education marital_status hh_income hh_income_mid poverty home_rooms home_own work weight length head_circ height bmi
+```
+] <!-- end pull-right -->
+] <!--  end panel -->
+] <!--  end panelset -->
+
+---
+
+
+template: question
+
+`r icons::icon_style(icons::fontawesome("edit"), scale = 3)`
+# How do change the data itself?
+
+---
+
+
+# mutate `r I(hexes(c("dplyr", "pipe")))`
+----
+The variables we have are usually not enough for all the questions we want to look at in an analysis.
+  + We often use a `log()` function to transform positive data to reduce skew or try to make associations more linear.
+  + We also like to combine variables to create new attributes based on existing attributes.
+  
+Therefore, we may want to create new columns based on the values in existing columns, for example to do unit conversions, or to find the ratio of values in two columns. For this we'll use `mutate()`.
+
+We use `mutate()` to **create new variables from old** - adds one or more columns to our temporary data frame. We do this *a lot*!
+
+---
+
+
+# mutate `r I(hexes(c("dplyr", "pipe")))`
+----
+```{r mutate-dummy, echo = T, eval = F}
+data %>% 
+  mutate(new_name = function(old_name))
+```
+
+
+
+---
+template: live-coding
+
+
+---
+name: your-turn
+background-color: var(--my-red)
+class: inverse
+
+.left-column[
+## Your turn<br>`r icons::fontawesome("edit")`<br>
+]
+
+.right-column[
+### Let's use mutate to wrangle out dataset
+----
+
+- Using pipes, create a new column that recalculates the BMI using the formula $BMI\_new = kg/m^2$
+- Note - the Height column is in `cm`! 
+- Select the participants who have a BMI_new smaller than 16 
+- display their `ID`, `BMI_new`, and `BMI`
+- Sort by `bmi_new`
+
+]
+
+```{r count4}
+countdown::countdown(minutes = 4, second = 0, 
+                     update_every = 15,
+                     left = 0 #position
+                     )
+```
+
+---
+```{r mutate-exercise, include = FALSE}
+NHANES::NHANESraw %>% 
+  mutate(Height_m = Height / 100,
+         bmi_new = Weight/(Height_m ^ 2)) %>% 
+  filter(bmi_new < 16) %>% 
+  select(ID, bmi_new, BMI) %>% 
+  arrange(bmi_new)
+```
+
+`r chunk_reveal("mutate-exercise")`
+
+
+
+---
+
+template: question
+
+`r icons::icon_style(icons::fontawesome("sitemap"), scale = 3)`
+# What about summary statistics?
+
+---
+
+# Summarize `r I(hexes(c("dplyr", "pipe")))`
+----
+- We create summary statistics for variables by using the `summarize()` function.
+- **Once you summarize, the data *not* being summarized is not included in the new data frame**  
+  + You are creating a temporary, summarized version of the data frame with usually fewer rows
+
+.pull-left[
+The following calculates the mean BMI across all individuals
+]
+.pull-right[
+```{r summarize, echo = TRUE}
+NHANES::NHANESraw %>%
+  summarize(BMI_mean = mean(BMI))
+```
+]
+
+---
+
+# Summarize `r I(hexes(c("dplyr", "pipe")))`
+----
+Did you notice the `NA`? When `R` performs calculations with missing data, it (correctly) doesn't know how to evaluate them and forces the result to `NA`. to solve this, we need to add in a special option to tell R that we want to ignore the missing values. 
+
+```{r summ-na, echo = TRUE}
+NHANES::NHANESraw %>%
+  summarize(BMI_mean = mean(BMI, na.rm = TRUE))
+```
+
+
+
+
+---
+template: live-coding
+
+
+---
+
+# Summarize `r I(hexes(c("dplyr", "pipe")))`
+----
+What if I want to see a different mean for each gender?
+```{r summarize-2, echo = TRUE}
+summary(NHANES::NHANESraw$Gender)
+```
+.pull-left[
+```{r summarize-2a, echo = TRUE}
+NHANES::NHANESraw %>%
+  filter(Gender == "female") %>% 
+  summarize(BMI_mean_female = mean(BMI, na.rm = TRUE))
+```
+]
+.pull-right[
+```{r summarize-2b, echo = TRUE}
+NHANES::NHANESraw %>%
+  filter(Gender == "male") %>% 
+  summarize(BMI_mean_male = mean(BMI, na.rm = TRUE))
+```
+]
+---
+
+# Group_by `r I(hexes(c("dplyr", "pipe")))`
+----
+Many data analysis tasks can be approached using the *split-apply-combine* paradigm: split the data into groups, apply some analysis to each group, and then combine the results. **`dplyr`** makes this very easy through the use of the `group_by()` function.
+
+`group_by()` is often used together with `summarize()`, which collapses each group into a single-row summary of that group.  `group_by()` takes as arguments the column names that contain the **categorical** variables for which you want to calculate the summary statistics. Groups are *virtual* in the sense *you are not changing the structure of the original data frame, just how R perceives in subsequent operations* until an `ungroup()` is used.
+We will do this a lot!
+
+The previous exercise required us to run three different sets of code to get summaries for the three penguin species
+`group_by` allows us to do that all at once by grouping the rows where the values in one of the columns, creates the groups e.g., `species` creates three rows, one for each species.
+
+---
+```{r groupby, include = FALSE}
+NHANES::NHANESraw %>%
+  group_by(Gender) %>% 
+  summarize(BMI_mean = mean(BMI, na.rm = TRUE),
+            count = n())
+```
+
+`r chunk_reveal("groupby")`
+
+---
+
+# count `r I(hexes(c("dplyr", "pipe")))`
+----
+.panelset[
+
+.panel[.panel-name[Description]
+
+The dplyr::count() function wraps a bunch of things into one beautiful friendly line of code to help you find counts of observations by group. To demonstrate what it does, let’s find the counts of genders and race groups in the NHANES dataset in two different ways:
+] <!-- end panel-->
+
+.panel[.panel-name[Summarize]
+```{r summarize-count, eval = F, echo=T}
+NHANES::NHANESraw %>% 
+  group_by(Gender, Race1) %>% 
+  summarize(n = n()) 
+```
+]<!-- end pull-left -->
+
+.pull-right[
+```{r summarize-count-out, echo=F, eval = T}
+NHANES::NHANESraw %>% 
+  group_by(Gender, Race1) %>% 
+  summarize(n = n())  %>% 
+  kable()
+```
+] <!-- end pull-right -->
+]<!-- end panel-->
+.panel[.panel-name[Count]
+.pull-left[
+```{r count_function, eval = F, echo=T}
+NHANES::NHANESraw %>% 
+  count(Gender, Race1) 
+```
+]<!-- end pull-left -->
+.pull-right[
+```{r count_function-out, echo=F, eval = T}
+NHANES::NHANESraw %>% 
+  count(Gender, Race1)  %>% 
+  kable()
+```
+] <!-- end pull-right -->
+] <!-- end panel-->
+
+] <!-- end panelset-->
+
+---
+
+template: live-coding
+---
+name: your-turn
+background-color: var(--my-red)
+class: inverse
+
+.left-column[
+## Your turn<br>`r icons::fontawesome("edit")`<br>
+]
+
+.right-column[
+### Let's experiment with aggregation
+----
+
+- Find the number of participants in the study for each education level
+- In a separate pipeline, find the minimum, median, and maximum combined diastolic blood pressure reading (`BPDiaAve`) across all participants.
+- In a separate pipeline, find the average `PhysActiveDays` and `SleepHrsNight` for people who have diabetes and people who don't. 
+- In a final pipeline, find the minimum and maximum `PhysActiveDays` for different `Race1`.
+]
+
+```{r count6}
+countdown::countdown(minutes = 7, second = 0, 
+                     update_every = 15,
+                     left = 0 #position
+                     )
+```
+
+---
+
+template: question
+
+`r icons::icon_style(icons::fontawesome("broom"), scale = 3)`
+# Part Two: Tidy Data
+
+---
+
+# What is tidy data `r I(hexes(c("tidyr")))`
+- Data sets are often described in terms of three elements: units, variables and observations:
+  + Units: the items described by the data. 
+    - They may be Observational or Experimental. 
+    - They may be referred to as  units, subjects, individuals, or cases or other terms. 
+    - They represent a population or a sample from a population, e.g., cars, people, or countries.
+    - They are not the "units of measurement" but the items being measured.
+    - They may be represented by variable, e.g., name, a combination of variables, e.g., country and year, or be implied and not explicitly represented by any variable (most common in summarized data), e.g., average scores for a group
+  + Variable: a characteristic or attribute of each unit about which we have data, e.g., mpg, age, or GDP.
+  + Observations: The single value for each variable for a given unit, e.g., 20 mpg, 31 years old, or \$20,513,000 US.
+
+---
+# Definition of Tidy Data `r I(hexes(c("tidyr")))`
+
+- We define tidy data very simply: It is a rectangular data set (the same number of rows for each column) where the data is shaped to have:  
+1.  **One unit per row.** 
+2.  **One variable per column.**
+3.  **One observation (or value) per cell (the intersection of each row and column).**
+
+![](https://american-stat-412612.netlify.app/img/tidy-1.png)
+
+---
+
+# Is this tidy? #1 `r I(hexes(c("tidyr")))`
+.pull-left[
+
+1.  **One unit per row.** 
+2.  **One variable per column.**
+3.  **One observation (or value) per cell (the intersection of each row and column).**
+
+]
+.pull-right[
+```{r}
+tidyr::table2 %>% 
+  kable()
+```
+]
+
+-- 
+No, violates rule #2 -  Cases and population should be different columns because they are different concepts. 
+
+---
+
+# Is this tidy? #2 `r I(hexes(c("tidyr")))`
+.pull-left[
+
+1.  **One unit per row.** 
+2.  **One variable per column.**
+3.  **One observation (or value) per cell (the intersection of each row and column).**
+
+]
+.pull-right[
+```{r}
+tidyr::table3 %>% 
+  kable()
+```
+]
+--
+No, violates rule #3 - holds two variables in each cell. 
+
+---
+
+# Is this tidy? #3 `r I(hexes(c("tidyr")))`
+.pull-left[
+
+1.  **One unit per row.** 
+2.  **One variable per column.**
+3.  **One observation (or value) per cell (the intersection of each row and column).**
+
+]
+.pull-right[
+```{r}
+tidyr::table4a %>% 
+  kable()
+
+tidyr::table4b %>% 
+  kable()
+```
+]
+--
+No, violates all rules - has each observation across two columns and each variable is its own table. 
+---
+# Is this tidy? #4 `r I(hexes(c("tidyr")))`
+.pull-left[
+
+1.  **One unit per row.** 
+2.  **One variable per column.**
+3.  **One observation (or value) per cell (the intersection of each row and column).**
+
+]
+.pull-right[
+```{r}
+tidyr::table1 %>% 
+  kable()
+```
+]
+--
+Yes! Finally! `r emo::ji("tada")`
+
+---
+
+# pivot_longer `r I(hexes(c("tidyr")))`
+Problem: One Attribute (implied variable) Appears In Multiple Columns.
+
+- The first argument is the dataset to reshape (which you can pipe in)
+- The second argument `cols = ` describes which columns need to be reshaped. 
+  + You can use any of the tidyselect tidy helper functions, e.g., `starts_with()` or `num_range()` 
+  + See "select" in help.
+- The `names_to = ` is the name of the variable you want to create to hold *the column names*.
+- The `values_to = `is the name of the variable you want to create to hold *the cell values*.
+
+```{r longer-dummy, echo = TRUE, eval = FALSE}
+data %>% 
+  pivot_longer(cols = c(""), 
+               names_to = "new name column", 
+               values_to = "new values column")
+```
+
+---
+```{r longer-1, include=FALSE}
+table4a %>%
+  pivot_longer(cols = c(`1999`, `2000`), 
+               names_to = "Year", 
+               values_to = "Cases" ) 
+```
+
+`r chunk_reveal("longer-1")`
+
+---
+name: your-turn
+background-color: var(--my-red)
+class: inverse
+
+.left-column[
+## Your turn<br>`r icons::fontawesome("edit")`<br>
+]
+
+.right-column[
+### Let's experiment with pivot_longer
+----
+
+- read the csv from [http://bit.ly/monkey-mem](http://bit.ly/monkey-mem)
+```{r echo = T, eval = F}
+monkeys <- read_csv("http://bit.ly/monkey-mem")
+head(monkeys)
+```
+- make it tidy `r icons::icon_style(icons::fontawesome("broom"))`
+
+
+- Why does this code fail?
+```{r echo = T, eval = F}
+tidyr::table4a %>% 
+  pivot_longer(cols = 1999, 2000, 
+               names_to = "year", 
+               values_to = "cases")
+```
+ 
+]
+
+```{r count7}
+countdown::countdown(minutes = 4, second = 0, 
+                     update_every = 15,
+                     left = 0 #position
+                     )
+```
+
+---
+```{r longer-exercise-1, include=FALSE}
+monkeys <- read_csv("http://bit.ly/monkey-mem", col_types = cols())
+monkeys %>%
+  pivot_longer(cols = Week2:Week16,
+               names_prefix = "Week",
+               names_to = "Week", 
+               values_to = "Percent" ) 
+```
+
+`r chunk_reveal("longer-exercise-1")`
+
+
+
+---
+How can we solve this?
+
+```{r}
+tidyr::who %>% 
+  head() %>% 
+  kable()
+```
+
+The data uses the original codes given by the World Health Organization. 
+The column names for columns five through 60 are made by combining new_ 
+- to a code for .my-coral[method of diagnosis] (rel = relapse, sn = negative pulmonary smear, sp = positive pulmonary smear, ep = extrapulmonary) 
+- to a code for .my-coral[gender] (f = female, m = male) 
+- to a code for .my-coral[age group] (014 = 0-14 yrs of age, 1524 = 15-24 years of age, 2534 = 25 to 34 years of age, etc).
+
+---
+template: live-coding
+
+---
+```{r advanced-longer, include=FALSE}
+who %>% 
+  pivot_longer(
+  cols = new_sp_m014:newrel_f65,
+  names_to = c("diagnosis", "gender", "age"),
+  names_pattern = "new_?(.*)_(.)(.*)",
+  values_to = "count")
+```
+
+`r chunk_reveal("advanced-longer")`
+
+
+---
+# pivot_wider `r I(hexes(c("tidyr")))`
+
+Problem: One Observation's Attributes Appear in Multiple rows.
+- One column contains variable names. 
+- One column contains values for the different attributes i.e., implied variables.
+- This can be more challenging to tidy as you have multiple variables to address
+
+```{r wider-dummy, echo = TRUE, eval = FALSE}
+data %>% 
+  pivot_wider(id_cols = c(IDs),
+              names_from = "original names", 
+              values_from = "original values")
+```
+
+
+---
+# pivot_wider `r I(hexes(c("tidyr")))`
+
+![](https://american-stat-412612.netlify.app/img/tidy-8.png)
+
+---
+name: your-turn
+background-color: var(--my-red)
+class: inverse
+
+.left-column[
+## Your turn<br>`r icons::fontawesome("edit")`<br>
+]
+
+.right-column[
+### Let's experiment with pivot_wider
+----
+
+- read the csv from [http://bit.ly/tidy_flowers](http://bit.ly/tidy_flowers)
+```{r echo = T, eval = F}
+flowers <- read_csv2("http://bit.ly/tidy_flowers")
+slice(flowers,20:28)
+flowers %>% 
+  pivot_wider(id_cols = ___,
+              names_from = _______, 
+              values_from = ______)
+```
+- make it tidy `r icons::icon_style(icons::fontawesome("broom"))`
+
+
+- Find the number of observations for each `Gender` and `Race1` group like we did earlier. Can transform this tidy format into an _untidy_ pivot table? This can be useful for presentations and reports. 
+
+]
+```{r count8}
+countdown::countdown(minutes = 4, second = 0, 
+                     update_every = 15,
+                     left = 0 #position
+                     )
+```
+
+---
+```{r wider-exercise-1, include=FALSE}
+flowers <- read_csv2("http://bit.ly/tidy_flowers", col_types = cols())
+flowers %>% 
+  pivot_wider(id_cols = c(Time, replication),
+              names_from = "Variable", 
+              values_from = "Value")
+```
+
+`r chunk_reveal("wider-exercise-1")`
+
+---
+```{r wider-exercise-2, include=FALSE}
+NHANES::NHANESraw %>% 
+  count(Gender, Race1) %>% 
+  pivot_wider(id_cols = Gender,
+              names_from = "Race1",
+              values_from = "n")
+```
+
+`r chunk_reveal("wider-exercise-2")`
+
+---
+
+# separate `r I(hexes(c("tidyr")))`
+
+```{r separate-1}
+head(table3) %>% 
+  kable()
+```
+
+---
+
+# separate `r I(hexes(c("tidyr")))`
+
+You need to specify at least three arguments:  
+
+1. The column you want to separate that has two (or more) variables,
+2. The character vector of the names of the new variables, and
+3. The character or numeric positions by which to separate out the new variables from the current column.
+
+```{r separate-2, echo = TRUE, eval = FALSE}
+data %>% 
+  separate(col = "original var",
+           into = c("new", "names"),
+           sep = "/")
+```
+
+---
+
+```{r separate-3, include=FALSE}
+tidyr::table3 %>%
+  separate(col = rate, 
+           into = c("cases", "population"), 
+           sep = "/")
+```
+
+`r chunk_reveal("separate-3")`
+
+---
+name: your-turn
+background-color: var(--my-red)
+class: inverse
+
+.left-column[
+## Your turn<br>`r icons::fontawesome("edit")`<br>
+]
+
+.right-column[
+### Let's experiment with separate
+----
+
+- read the csv from [http://bit.ly/separate_flowers](http://bit.ly/separate_flowers)
+```{r echo = T, eval = F}
+flowers2 <- read_csv2("http://bit.ly/separate_flowers")
+slice(flowers2,20:28)
+flowers %>% 
+  separate(col = ______,
+           into = _____,
+           sep = ____)
+```
+- make it tidy `r icons::icon_style(icons::fontawesome("broom"))`
+
+
+- Take a look at the `NHANESraw` variable `HHIncome`. Can you use separate to make a lower income and upper income bracket? 
+
+]
+```{r count9}
+countdown::countdown(minutes = 4, second = 0, 
+                     update_every = 15,
+                     left = 0 #position
+                     )
+```
+---
+```{r separate-exercise-1, include=FALSE}
+flowers <- read_csv2("http://bit.ly/separate_flowers", col_types = cols())
+flowers %>% 
+  separate(col = `Flowers/Intensity`, 
+           into = c("Flowers", "Intensity"), 
+           sep = "/")
+```
+
+`r chunk_reveal("separate-exercise-1")`
+
+---
+```{r separate-exercise-2, include=FALSE}
+NHANES::NHANESraw %>% 
+  select(starts_with("HHI")) %>% 
+  separate(col = HHIncome, 
+           into = c("lower_HHI", "upper_HHI"), 
+           sep = "-")
+```
+
+`r chunk_reveal("separate-exercise-2")`
+
+
+---
+name: your-turn
+background-color: var(--my-red)
+class: inverse
+
+.left-column[
+## Your turn<br>`r icons::fontawesome("edit")`<br>
+]
+
+.right-column[
+### Day 1 Case Study
+----
+- What percent of those studied have Excellent health? (don't forget about `n()`)
+- What percent of those with Diabetes have Excellent health? 
+- Attempt to recreate the following table:
+(Self Rated Health = `HealthGen`)
+
+```{r challenge-1, echo = F, eval = T, message = F}
+NHANESraw %>% 
+  count(HealthGen, Diabetes) %>% 
+  drop_na()  %>% 
+  group_by(HealthGen) %>% 
+  summarize(percent = n / sum(n),
+            Diabetes = Diabetes) %>% 
+  pivot_wider(id_cols = HealthGen,
+              names_from = "Diabetes",
+              values_from = "percent",
+              names_prefix = "Diabetes_"
+               ) %>% 
+  rename(Self_Rated_Health = HealthGen) %>% 
+  ungroup()
+```
+
+]
+
+```{r count10}
+countdown::countdown(minutes = 4, second = 0, 
+                     update_every = 15,
+                     left = 0 #position
+                     )
+```
+---
+`r chunk_reveal("challenge-1")`
+
+---
+
+class: left
+
+# Up Next `r I(hexes(c("forcats", "lubridate", "stringr", "dplyr","glue", "purrr")))`
+----
+.pull-left[
+### Day 2
+- `case_when` & `ifelse`
+- factors and `forcats`
+- `lubridate`
+- `stringr` & regex
+- `glue`
+]
+.pull-right[
+### Day 3
+- relational data & joins
+- `across()`
+- `rowwise()`
+- `distinct()`
+- `purrr()`
+]
+
+---
+
+class: goodbye-slide, inverse, middle, left
+
+.pull-left[
+<img src="https://kelseygonzalez.github.io/author/kelsey-e.-gonzalez/avatar.png" class = "rounded"/>
+
+# Thank you!
+
+### Here's where you can find me...
+
+.right[
+[kelseygonzalez.github.io `r icons::fontawesome("link")`](https://kelseygonzalez.github.io/)<br/>
+[@KelseyEGonzalez `r icons::fontawesome("twitter")`](https://twitter.com/kelseyegonzalez)<br/>
+[@KelseyGonzalez `r icons::icon_style(icons::fontawesome("github"), scale = 1)`](https://github.com/KelseyGonzalez)
+]]
+
+---
+class: inverse, middle, left
+
+## Acknowledgements:
+[Slide template](https://spcanelon.github.io/xaringan-basics-and-beyond/)  
+[Lecture structure](https://american-stat-412612.netlify.app/)  
+[xaringan](https://github.com/yihui/xaringan)  
+[xaringanExtra](https://pkg.garrickadenbuie.com/xaringanExtra/#/)  
+[flipbookr](https://github.com/EvaMaeRey/flipbookr)  
+
