@@ -962,9 +962,8 @@ tidyr::table2 %>%
   kable()
 ```
 ]
-
 -- 
-No, violates rule #2 -  Cases and population should be different columns because they are different concepts. 
+No, violates rule #2 - Cases and population should be different columns because they are different concepts. 
 
 ---
 

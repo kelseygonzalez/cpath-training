@@ -962,9 +962,8 @@ tidyr::table2 %>%
   kable()
 ```
 ]
-
 -- 
-No, violates rule #2 -  Cases and population should be different columns because they are different concepts. 
+No, violates rule #2 - Cases and population should be different columns because they are different concepts. 
 
 ---
 
@@ -1396,9 +1395,9 @@ class: goodbye-slide, inverse, middle, left
 class: inverse, middle, left
 
 ## Acknowledgements:
-[Slide template](https://spcanelon.github.io/xaringan-basics-and-beyond/)
-[Lecture structure](https://american-stat-412612.netlify.app/)
-[xaringan](https://github.com/yihui/xaringan)
-[xaringanExtra](https://pkg.garrickadenbuie.com/xaringanExtra/#/)
-[flipbookr](https://github.com/EvaMaeRey/flipbookr)
+[Slide template](https://spcanelon.github.io/xaringan-basics-and-beyond/)  
+[Lecture structure](https://american-stat-412612.netlify.app/)  
+[xaringan](https://github.com/yihui/xaringan)  
+[xaringanExtra](https://pkg.garrickadenbuie.com/xaringanExtra/#/)  
+[flipbookr](https://github.com/EvaMaeRey/flipbookr)  
 
