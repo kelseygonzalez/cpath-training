@@ -64,7 +64,35 @@ hexes <- function(x) {
 }
 ```
 
-class: title-slide, center, center
+```{r metathis, echo=FALSE}
+library(metathis)
+meta() %>%
+  meta_name("github-repo" = "kelseygonzalez/cpath-training") %>% 
+  meta_social(
+    title = "Advanced Data Wrangling",
+    description = paste(
+      "Advanced Data Wrangling with the Tidyverse.",
+      "Presented at Critical Path Institute, 2021."
+    ),
+    url = "https://kelseygonzalez.github.io/cpath-training/day-01-basics.html",
+    image = "https://kelseygonzalez.github.io/cpath-training/social-card.png",
+    image_alt = paste(
+      "Title slide of Advanced Data Wrangling with the Tidyverse.:", 
+      "Presented at Critical Path Institute, 2021 by Kelsey Gonzalez"
+    ),
+    og_type = "website",
+    og_author = "Kelsey Gonzalez",
+    twitter_card_type = "summary_large_image",
+    twitter_creator = "@KelseyEGonzalez",
+    twitter_site = "@KelseyEGonzalez"
+  )
+```
+
+class: title-slide, left, top
+background-image: url(img/sam-balye-k5RD4dl8Y1o-unsplash_blue.jpg)
+background-position: 75% 75%
+background-size: cover
+
 
 # `r rmarkdown::metadata$title`
 ### `r rmarkdown::metadata$subtitle`
