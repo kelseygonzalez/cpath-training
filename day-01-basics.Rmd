@@ -21,7 +21,6 @@ output:
       highlightLanguage: ["r"]
       countIncrementalSlides: false
       ratio: 16:9
-      #ratio: 191:100
       beforeInit: "macros.js"
       slideNumberFormat: |
         <div class="progress-bar-container">
@@ -459,6 +458,13 @@ tribble(
   "x & y","x AND y") %>% 
   kbl() %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
+
+---
+# Filter `r I(hexes(c("dplyr")))`
+----
+```{r venn-plot, eval = TRUE}
+knitr::include_graphics("img/logic-venn.png")
 ```
 
 ---
@@ -1213,7 +1219,7 @@ flowers %>%
 
 ]
 ```{r count8}
-countdown::countdown(minutes = 4, second = 0, 
+countdown::countdown(minutes = 3, second = 0, 
                      update_every = 15,
                      left = 0 #position
                      )

@@ -167,7 +167,7 @@ div.footer-link {
 
 /*-- In-line highlighting within text --*/
 .remark-code, .remark-inline-code {
-  font-size:          80%;
+  font-size:          70%;
   color:              var(--my-blue);
   background:         var(--PaleGrey);
   border-radius:      3px;

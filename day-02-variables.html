@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>C-Path R Training</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Kelsey Gonzalez" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view/tile-view.js"></script>
+    <script src="libs/clipboard/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="libs/shareon/shareon.min.css" rel="stylesheet" />
+    <script src="libs/shareon/shareon.min.js"></script>
+    <link href="libs/xaringanExtra-shareagain/shareagain.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-shareagain/shareagain.js"></script>
+    <meta name="github-repo" content="kelseygonzalez/cpath-training"/>
+    <meta name="twitter:title" content="Advanced Data Wrangling II"/>
+    <meta name="twitter:description" content="Advanced Data Wrangling with the Tidyverse. Presented at Critical Path Institute, 2021."/>
+    <meta name="twitter:url" content="https://kelseygonzalez.github.io/cpath-training/day-02-variables.html"/>
+    <meta name="twitter:image:src" content="https://kelseygonzalez.github.io/cpath-training/social-card.png"/>
+    <meta name="twitter:image:alt" content="Title slide of Advanced Data Wrangling with the Tidyverse.: Presented at Critical Path Institute, 2021 by Kelsey Gonzalez"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:creator" content="@KelseyEGonzalez"/>
+    <meta name="twitter:site" content="@KelseyEGonzalez"/>
+    <meta property="og:title" content="Advanced Data Wrangling II"/>
+    <meta property="og:description" content="Advanced Data Wrangling with the Tidyverse. Presented at Critical Path Institute, 2021."/>
+    <meta property="og:url" content="https://kelseygonzalez.github.io/cpath-training/day-02-variables.html"/>
+    <meta property="og:image" content="https://kelseygonzalez.github.io/cpath-training/social-card.png"/>
+    <meta property="og:image:alt" content="Title slide of Advanced Data Wrangling with the Tidyverse.: Presented at Critical Path Institute, 2021 by Kelsey Gonzalez"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="article:author" content="Kelsey Gonzalez"/>
+    <link href="libs/countdown/countdown.css" rel="stylesheet" />
+    <script src="libs/countdown/countdown.js"></script>
+    <link rel="stylesheet" href="css/mytheme.css" type="text/css" />
+    <link rel="stylesheet" href="css/mytheme-fonts.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+class: title-slide, left, top
+background-image: url(img/sam-balye-k5RD4dl8Y1o-unsplash_blue.jpg)
+background-position: 75% 75%
+background-size: cover
+
+
+# C-Path R Training
+### Advanced Data Wrangling Part II
+
+**Kelsey Gonzalez**&lt;br&gt;
+May 27, 2021 &amp;#8212; Day 2
+
+---
+name: about-me
+layout: false
+class: about-me-slide, inverse, middle, center
+
+# About me
+
+&lt;img src="https://kelseygonzalez.github.io/author/kelsey-e.-gonzalez/avatar.png" class="rounded"/&gt;
+
+## Kelsey Gonzalez
+
+.fade[University of Arizona&lt;br&gt;IBM]
+
+[&lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"&gt;&lt;/path&gt;&lt;/svg&gt; kelseygonzalez.github.io](https://kelseygonzalez.github.io/)
+[&lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"&gt;&lt;/path&gt;&lt;/svg&gt; @KelseyEGonzalez](https://twitter.com/kelseyegonzalez)
+[&lt;svg viewBox="0 0 496 512" style="position:relative;display:inline-block;top:.1em;height:1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"&gt;&lt;/path&gt;&lt;/svg&gt; @KelseyGonzalez](https://github.com/KelseyGonzalez)
+
+---
+class: left
+
+# About you
+
+--
+
+.pull-left-narrow[.center[
+&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyverse.png" width="25%"/&gt;]]
+.pull-right-wide[### You're pretty good at data wrangling]
+
+--
+
+.pull-left-narrow[
+.center[&lt;svg viewBox="0 0 512 512" style="position:relative;display:inline-block;top:.1em;height:2em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M224 96l16-32 32-16-32-16-16-32-16 32-32 16 32 16 16 32zM80 160l26.66-53.33L160 80l-53.34-26.67L80 0 53.34 53.33 0 80l53.34 26.67L80 160zm352 128l-26.66 53.33L352 368l53.34 26.67L432 448l26.66-53.33L512 368l-53.34-26.67L432 288zm70.62-193.77L417.77 9.38C411.53 3.12 403.34 0 395.15 0c-8.19 0-16.38 3.12-22.63 9.38L9.38 372.52c-12.5 12.5-12.5 32.76 0 45.25l84.85 84.85c6.25 6.25 14.44 9.37 22.62 9.37 8.19 0 16.38-3.12 22.63-9.37l363.14-363.15c12.5-12.48 12.5-32.75 0-45.24zM359.45 203.46l-50.91-50.91 86.6-86.6 50.91 50.91-86.6 86.6z"&gt;&lt;/path&gt;&lt;/svg&gt;]]
+.pull-right-wide[### You don't have much exposure to special variable types]
+
+--
+
+
+.pull-left-narrow[
+.center[&lt;svg viewBox="0 0 512 512" style="position:relative;display:inline-block;top:.1em;height:2em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M223.75 130.75L154.62 15.54A31.997 31.997 0 0 0 127.18 0H16.03C3.08 0-4.5 14.57 2.92 25.18l111.27 158.96c29.72-27.77 67.52-46.83 109.56-53.39zM495.97 0H384.82c-11.24 0-21.66 5.9-27.44 15.54l-69.13 115.21c42.04 6.56 79.84 25.62 109.56 53.38L509.08 25.18C516.5 14.57 508.92 0 495.97 0zM256 160c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm92.52 157.26l-37.93 36.96 8.97 52.22c1.6 9.36-8.26 16.51-16.65 12.09L256 393.88l-46.9 24.65c-8.4 4.45-18.25-2.74-16.65-12.09l8.97-52.22-37.93-36.96c-6.82-6.64-3.05-18.23 6.35-19.59l52.43-7.64 23.43-47.52c2.11-4.28 6.19-6.39 10.28-6.39 4.11 0 8.22 2.14 10.33 6.39l23.43 47.52 52.43 7.64c9.4 1.36 13.17 12.95 6.35 19.59z"&gt;&lt;/path&gt;&lt;/svg&gt;]]
+.pull-right-wide[### .my-gold[**You want to master data wrangling**]] 
+
+
+---
+# Learning Objectives
+
+- Use case evaluations to create new variables
+- Manipulate strings with the stringr package.
+- Employ regular expressions (REGEX) to manipulate strings
+- Use functions from the {forcats} package to manipulate factors in R.  
+- Manipulate dates and times using the `lubridate` package.
+---
+
+name: question
+class: inverse, middle, center
+
+{{content}}
+---
+template: question
+
+&lt;img src="img/tidyverse.png" width="25%"/&gt;
+# How can we create new categorical variables? 
+
+---
+
+# ifelse()
+----
+ifelse() is a vectorised function with `test`, `yes`, and `no` vectors that will be applied to whatever you pass to it.
+
+
+```r
+ifelse(test = vector == condition, "result if true", "result if false")
+```
+---
+# ifelse()
+----
+
+```r
+x &lt;- 1:6
+ifelse(test = x &lt; 3, yes = "small", no = "large")
+## [1] "small" "small" "large" "large" "large" "large"
+```
+
+
+```r
+nhanes %&gt;% 
+  mutate(pulse_type = ifelse(Pulse &gt; 70, "fast", "slow")) %&gt;% 
+  select(Pulse, pulse_type)
+## # A tibble: 20,293 x 2
+##    Pulse pulse_type
+##    &lt;int&gt; &lt;chr&gt;     
+##  1    70 slow      
+##  2    NA &lt;NA&gt;      
+##  3    68 slow      
+##  4    68 slow      
+##  5    72 fast      
+##  6    72 fast      
+##  7    86 fast      
+##  8    NA &lt;NA&gt;      
+##  9    70 slow      
+## 10    88 fast      
+## # ... with 20,283 more rows
+```
+
+---
+
+# case_when() &lt;img src="img/dplyr.png" class="title-hex"&gt;
+----
+This function allows you to vectorize (and replace) multiple `if_else()` statements in a succinct and clear manner. The syntax is
+
+```r
+case_when(conditon1 ~ "result if conditon1 is true",
+          condition2 ~ "results if condition2 is true",
+          TRUE ~ "catch for everything else")
+```
+
+
++ The Left hand side (LHS) determines which variables match a given case - this must return a logical vector
++ The Right hand side (RHS) provides the new or replacement value and all have to be of the same type of vector
++ you always end with a case of TRUE for when all of the other cases are FALSE
++ case_when is particularly useful inside mutate when you want to create a *new variable* that relies on a **complex combination** of existing variables
+  
+---
+# case_when()&lt;img src="img/dplyr.png" class="title-hex"&gt;
+----
+
+
+```r
+x &lt;- 1:16
+x
+##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16
+case_when(
+  x &lt; 5 ~ "&lt; 5",
+  x &lt; 10 ~ "&lt; 10",
+  TRUE ~ as.character(x)
+)
+##  [1] "&lt; 5"  "&lt; 5"  "&lt; 5"  "&lt; 5"  "&lt; 10" "&lt; 10" "&lt; 10" "&lt; 10" "&lt; 10" "10"  
+## [11] "11"   "12"   "13"   "14"   "15"   "16"
+```
+
+---
+# case_when()&lt;img src="img/dplyr.png" class="title-hex"&gt;
+----
+
+```r
+nhanes %&gt;% 
+  mutate(health_status = case_when(Diabetes == "Yes" ~ "at-risk",
+                                   Age &gt; 70 ~ "at-risk",
+                                   BPDiaAve &lt; 80 &amp; BPSysAve &gt; 120 ~ "at-risk",
+                                   TRUE ~ "okay")) %&gt;% 
+  select(health_status) %&gt;% head()
+## # A tibble: 6 x 1
+##   health_status
+##   &lt;chr&gt;        
+## 1 okay         
+## 2 okay         
+## 3 okay         
+## 4 okay         
+## 5 at-risk      
+## 6 okay
+```
+---
+
+name: live-coding
+background-color: var(--my-yellow)
+class: middle, center
+
+&lt;svg viewBox="0 0 640 512" style="position:relative;display:inline-block;top:.1em;height:3em;color:#122140;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;br&gt;
+# Let's try it live together
+
+---
+
+name: your-turn
+background-color: var(--my-red)
+class: inverse
+
+.left-column[
+## Your turn&lt;br&gt;&lt;svg viewBox="0 0 576 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;br&gt;
+]
+
+.right-column[
+### Let's practice using case_when()
+----
+Look up the variable `AgeDecade` in the NHANES documentation (`?NHANES`). It is missing in our raw version of the dataset. Recreate `AgeDecade` using `case_when()` and find how many cases are in each age category. 
+
+]
+<div class="countdown blink-colon noupdate-15" id="timer_60af201c" style="bottom:0;left:0;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">03</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+---
+
+template: question
+
+&lt;svg viewBox="0 0 448 512" style="position:relative;display:inline-block;top:.1em;height:2em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M432 416h-23.41L277.88 53.69A32 32 0 0 0 247.58 32h-47.16a32 32 0 0 0-30.3 21.69L39.41 416H16a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16h-19.58l23.3-64h152.56l23.3 64H304a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM176.85 272L224 142.51 271.15 272z"&gt;&lt;/path&gt;&lt;/svg&gt;
+## How to deal with text
+
+---
+
+# Strings
+----
+Strings (character vectors) are interesting. 
+
+
+```r
+a &lt;- "Grace Hopper said, \"If it's a good idea, go ahead and do it.\nIt's much easier to apologize than it is to get permission.\""
+a
+## [1] "Grace Hopper said, \"If it's a good idea, go ahead and do it.\nIt's much easier to apologize than it is to get permission.\""
+cat(a)
+## Grace Hopper said, "If it's a good idea, go ahead and do it.
+## It's much easier to apologize than it is to get permission."
+```
+-   `"\n"` represents a new line
+-   `"\t"` represents a tab
+
+
+---
+# stringr &lt;img src="img/stringr.png" class="title-hex"&gt;
+----
+use `str_length()` to get the number of characters in a
+string.
+
+
+```r
+beyonce &lt;- "I am Beyoncé, always."
+str_length(beyonce)
+## [1] 21
+```
+
+What about spaces and punctuation marks - they count! What about escaped
+characters? The '' does not but the character itself does.
+
+
+```r
+str_length("I am Beyoncé, \nalways.")
+## [1] 22
+```
+
+
+---
+## replacing words with `str_replace()` &lt;img src="img/stringr.png" class="title-hex"&gt;
+
+----
+`str_sub()` extracts a substring between the location of two characters.
+
+
+```r
+hopper &lt;- "A ship in port is safe, but that's not what ships are built for."
+str_sub(hopper, start = 3, end = 6)
+## [1] "ship"
+```
+
+You often want to use str_sub when the data is highly structured
+
+
+```r
+phone &lt;- "800-800-8553"
+#first three
+str_sub(phone, end = 3)
+## [1] "800"
+# last four
+str_sub(phone, start = -4)
+## [1] "8553"
+```
+
+
+---
+## replacing words with `str_replace()` &lt;img src="img/stringr.png" class="title-hex"&gt;
+----
+.panelset[
+.panel[.panel-name[Hopper]
+If I want to replace a specific pattern of text with another pattern,
+`str_replace()` or `str_replace_all()` are very useful.
+
+
+```r
+hopper
+## [1] "A ship in port is safe, but that's not what ships are built for."
+str_replace(hopper, "ship", "car")
+## [1] "A car in port is safe, but that's not what ships are built for."
+str_replace_all(hopper, "ship", "car")
+## [1] "A car in port is safe, but that's not what cars are built for."
+```
+]
+.panel[.panel-name[Phone Number]
+Back with our phone number example, you'll see there's a difference
+between `str_replace()` or `str_replace_all()`. The first only replaces
+the first instance
+
+
+```r
+phone
+## [1] "800-800-8553"
+str_replace(phone, "800-", "")
+## [1] "800-8553"
+str_replace_all(phone, "800-", "")
+## [1] "8553"
+```
+
+If I only want to change the *second* instance of "800-", I'll need to
+use a more complicated pattern match. This would require a regular
+expression
+]
+]
+
+---
+
+name: your-turn
+background-color: var(--my-red)
+class: inverse
+
+.left-column[
+## Your turn&lt;br&gt;&lt;svg viewBox="0 0 576 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;br&gt;
+]
+
+.right-column[
+### Let's practice using stringr functions
+----
+Save the following string:
+
+```r
+z &lt;- "You don't manage people, you manage things.\nYou lead people."
+```
+- How many characters does this string have? 
+- Using string subsetting by indexes, can you extract the word "people"? 
+- Replace the `\n` with a space
+
+]
+<div class="countdown blink-colon noupdate-15" id="timer_60af2117" style="bottom:0;left:0;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">03</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+---
+
+template: question
+
+&lt;svg viewBox="0 0 448 512" style="position:relative;display:inline-block;top:.1em;height:2em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M432 416h-23.41L277.88 53.69A32 32 0 0 0 247.58 32h-47.16a32 32 0 0 0-30.3 21.69L39.41 416H16a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16h-19.58l23.3-64h152.56l23.3 64H304a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM176.85 272L224 142.51 271.15 272z"&gt;&lt;/path&gt;&lt;/svg&gt;
+# You keep mentioning regular expressions? 
+
+---
+# Regular Expressions 
+----
+-   Regular expressions (regex or regexp) are a syntax for **pattern
+    matching** in strings.
+
+-   Regex structure is used in many different computer languages
+
+-   Wherever there is a `pattern` argument in a stringr function, you
+    can use regex (to extract strings, get a logical if there is a
+    match, etc...).
+
+-   regex includes special characters, e.g., `.` and `*` These must be
+    escaped using `\\` if you want to match their normal literal value.
+
+---
+# Regular Expressions  &lt;img src="img/stringr.png" class="title-hex"&gt;
+----
+
+-   A period "`.`" matches any character.
+-   A `[:alpha:]` matches any alphabetical character.
+-   You can "escape" a symbol with two backslashes "`\\.`" to match. If you don't, the asterisk in this case will be interpreted as a regular expression command, not a symbol.
+
+By default, regular expressions will match any part of a string. It’s often useful to anchor the regular expression so that it matches from the start or end of the string. You can use:
+
+- `^` to match the start of the string.
+- `$` to match the end of the string.
+
+
+```r
+fruit &lt;- c("Apple", "Strawberry", "Banana", "Pear", "Blackberry", "*berry")
+```
+
+---
+template: live-coding
+---
+
+## Symbols &lt;img src="img/stringr.png" class="title-hex"&gt;
+There are a lot of regular expression character matches in R and I don't
+expect you to memorize them all - I often have [the
+cheatsheet](https://github.com/rstudio/cheatsheets/blob/master/strings.pdf)
+open next to me while working. Some important ones you should however be
+able to recognize:
+
+| type this: | to mean this: |
+|------------|---------------|
+| \\\\n                   | new line                        |
+| \\\\s or \[:space:\]    | any whitespace                  |
+| \\\\d or \[:digit:\]    | any digit                       |
+| \\\\w or \[:alpha:\]      | any word character              |
+| \[:punct:\]             | any punctuation                 |
+| .                       | every character except new line |
+
+---
+## Alternates &lt;img src="img/stringr.png" class="title-hex"&gt;
+
+| type this: | to mean this: |
+|------------|---------------|
+| [abc]      | one of a, b or c |
+| [^abc]     | anything but a, b or c |
+
+---
+template: live-coding
+---
+
+## Quantifiers &lt;img src="img/stringr.png" class="title-hex"&gt;
+
+| Expression 	| matches                  	|
+|------------	|--------------------------	|
+| a?         	| a, zero or one times     	|
+| a*         	| a, zero or more times    	|
+| a+         	| a, one or more times     	|
+| a\{n\}       	| a, n times               	|
+| a\{n,\}      	| a, n or more times       	|
+| a\{n,m\}     	| a, between n and m times 	|
+---
+template: live-coding
+---
+name: your-turn
+background-color: var(--my-red)
+class: inverse
+
+.left-column[
+## Your turn&lt;br&gt;&lt;svg viewBox="0 0 576 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;br&gt;
+]
+
+.right-column[
+### Let's practice using stringr functions
+----
+Given the corpus of common words in stringr::words, use `str_view()` and create regular expressions that find all words that:
+
+- Start with “y”
+- End with “x”
+- Are exactly three letters long
+- Have seven letters or more
+- Start with a vowel
+
+
+]
+<div class="countdown blink-colon noupdate-15" id="timer_60af2142" style="bottom:0;left:0;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">03</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+---
+# Regular Expressions &lt;img src="img/stringr.png" class="title-hex"&gt;
+
+There is a lot more to learn about regular expressions what we won't cover here,
+like groups and look arounds. Groups allows you to define which part of the
+expression you want to extract or replace and look arounds allow you to define
+what follows or precedes the expression. When you need to learn more, there are
+many tools online like [https://regex101.com/](https://regex101.com/) to help
+you learn. The only important thing to remember with online regular expression
+tools is that `r` needs an extra `\` preceding each `\` in other coding
+languages.
+---
+## Changing Case with stringr &lt;img src="img/stringr.png" class="title-hex"&gt;
+
+-   `str_to_lower()` and `str_to_upper()` convert all letters to lower
+    or capital case.
+-   `str_to_sentence` converts all words and letters to sentence
+    case. Includes Acronyms
+-   `str_to_title` converts the first letter of every word to capital case.
+    
+
+```r
+mission &lt;- "Critical Path Institute is a catalyst in the development of new approaches to advance medical innovation and regulatory science."
+str_to_lower(mission)
+## [1] "critical path institute is a catalyst in the development of new approaches to advance medical innovation and regulatory science."
+str_to_upper(mission)
+## [1] "CRITICAL PATH INSTITUTE IS A CATALYST IN THE DEVELOPMENT OF NEW APPROACHES TO ADVANCE MEDICAL INNOVATION AND REGULATORY SCIENCE."
+str_to_sentence(mission)
+## [1] "Critical path institute is a catalyst in the development of new approaches to advance medical innovation and regulatory science."
+str_to_title(mission)
+## [1] "Critical Path Institute Is A Catalyst In The Development Of New Approaches To Advance Medical Innovation And Regulatory Science."
+```
+
+---
+## Detecting matches with stringr &lt;img src="img/stringr.png" class="title-hex"&gt;
+
+`str_detect()`: Returns `TRUE` if a regex pattern matches a string and `FALSE` if it does not. Very useful for filters.
+
+To ignore case, place a `(?i)` before the regex.
+
+```r
+nhanes %&gt;% 
+  select(HealthGen) %&gt;% 
+  filter(str_detect(HealthGen, "(?i)good")) %&gt;% 
+  head()
+## # A tibble: 6 x 1
+##   HealthGen
+##   &lt;fct&gt;    
+## 1 Good     
+## 2 Vgood    
+## 3 Good     
+## 4 Good     
+## 5 Good     
+## 6 Good
+```
+    
+---
+# Combining strings with glue &lt;img src="img/glue.png" class="title-hex"&gt;
+
+
+```r
+# install.packages("glue")
+library(glue)
+## 
+## Attaching package: 'glue'
+## The following object is masked from 'package:dplyr':
+## 
+##     collapse
+
+name &lt;- "Fred"
+age &lt;- 50
+anniversary &lt;- as.Date("1991-10-12")
+
+glue('My name is {name}, my age next year is {age + 1}, and my anniversary is {format(anniversary, "%A, %B %d, %Y")}.') 
+## My name is Fred, my age next year is 51, and my anniversary is Saturday, October 12, 1991.
+```
+---
+template: live-coding
+---
+
+name: your-turn
+background-color: var(--my-red)
+class: inverse
+
+.left-column[
+## Your turn&lt;br&gt;&lt;svg viewBox="0 0 576 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;br&gt;
+]
+
+.right-column[
+### Let's practice glue!
+----
+With the nhanes dataset, create a new character column that looks something like:
+"`ID` is a `Age` year old `Gender` who `"smokes" or "doesn't smoke"`"
+
+You'll either need to create a new variable using `ifelse()` or `case_when()` before you write your glue statement or use `ifelse()` or `case_when()` inside of `{}`
+
+]
+<div class="countdown blink-colon noupdate-15" id="timer_60af204a" style="bottom:0;left:0;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">03</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+---
+&lt;img src="img/pipe.png" class="title-hex"&gt;&lt;img src="img/glue.png" class="title-hex"&gt;&lt;img src="img/dplyr.png" class="title-hex"&gt;
+
+```r
+library(glue)
+
+nhanes %&gt;% 
+  select(ID, Age, Gender, SmokeNow) %&gt;% 
+  mutate(smoke_text = ifelse(SmokeNow == "Yes", "smokes", "doesn't smoke"),
+         text = glue("{ID} is a {Age} year old {Gender} who {smoke_text}")) %&gt;% 
+  head()
+## # A tibble: 6 x 6
+##      ID   Age Gender SmokeNow smoke_text    text                                
+##   &lt;int&gt; &lt;int&gt; &lt;fct&gt;  &lt;fct&gt;    &lt;chr&gt;         &lt;glue&gt;                              
+## 1 51624    34 male   No       doesn't smoke 51624 is a 34 year old male who doe~
+## 2 51625     4 male   &lt;NA&gt;     &lt;NA&gt;          51625 is a 4 year old male who NA   
+## 3 51626    16 male   &lt;NA&gt;     &lt;NA&gt;          51626 is a 16 year old male who NA  
+## 4 51627    10 male   &lt;NA&gt;     &lt;NA&gt;          51627 is a 10 year old male who NA  
+## 5 51628    60 female Yes      smokes        51628 is a 60 year old female who s~
+## 6 51629    26 male   No       doesn't smoke 51629 is a 26 year old male who doe~
+```
+
+---
+&lt;img src="img/pipe.png" class="title-hex"&gt;&lt;img src="img/glue.png" class="title-hex"&gt;&lt;img src="img/dplyr.png" class="title-hex"&gt;
+A little more elegant... 
+
+```r
+library(glue)
+
+nhanes %&gt;% 
+  select(ID, Age, Gender, SmokeNow) %&gt;% 
+  mutate(text = glue("{ID} is a {Age} year old {Gender} who {case_when(SmokeNow == 'Yes'~'smokes',SmokeNow == 'No'~'doesnt smoke',Age &lt; 20 ~ 'is too young to smoke',TRUE~'we dont know the smoking status for')}")) %&gt;% 
+  head()
+## # A tibble: 6 x 5
+##      ID   Age Gender SmokeNow text                                              
+##   &lt;int&gt; &lt;int&gt; &lt;fct&gt;  &lt;fct&gt;    &lt;glue&gt;                                            
+## 1 51624    34 male   No       51624 is a 34 year old male who doesnt smoke      
+## 2 51625     4 male   &lt;NA&gt;     51625 is a 4 year old male who is too young to sm~
+## 3 51626    16 male   &lt;NA&gt;     51626 is a 16 year old male who is too young to s~
+## 4 51627    10 male   &lt;NA&gt;     51627 is a 10 year old male who is too young to s~
+## 5 51628    60 female Yes      51628 is a 60 year old female who smokes          
+## 6 51629    26 male   No       51629 is a 26 year old male who doesnt smoke
+```
+
+---
+name: break
+background-color: var(--my-yellow)
+class: middle, center
+
+&lt;svg viewBox="0 0 448 512" style="position:relative;display:inline-block;top:.1em;height:2em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M144 479H48c-26.5 0-48-21.5-48-48V79c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zm304-48V79c0-26.5-21.5-48-48-48h-96c-26.5 0-48 21.5-48 48v352c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48z"&gt;&lt;/path&gt;&lt;/svg&gt;
+# Break
+
+<div class="countdown" id="timer_60af2219" style="right:0;bottom:0;left:0;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">03</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+ 
+---
+
+template: question
+
+&lt;svg viewBox="0 0 512 512" style="position:relative;display:inline-block;top:.1em;height:2em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"&gt;&lt;/path&gt;&lt;/svg&gt;
+# What are Factors? 
+
+---
+# Factors  
+----
+R has a special data class, called factor, to deal with categorical data that
+you may encounter when creating plots or doing statistical analyses. They are
+stored as integers associated with labels and they can be ordered or unordered.
+While factors look (and often behave) like character vectors, they are actually
+treated as integer vectors by R. So you need to be very careful when treating
+them as strings.
+
+To work with factors, we will practice with the `gapminder` dataset. 
+
+```r
+install.packages("gapminder")
+library(gapminder)
+```
+
+---
+# Factors 
+----
+
+Once created, factors can only contain a pre-defined set of values, known as
+*levels*. By default, base R always sorts levels in alphabetical order. For
+instance, if you have a factor with 2 levels:
+
+
+```r
+feeling &lt;- factor(c("sad", "happy", "happy", "sad"))
+feeling
+## [1] sad   happy happy sad  
+## Levels: happy sad
+```
+
+R will assign `1` to the level `"happy"` and `2` to the level `"sad"`
+(because `h` comes before `s` in the alphabet, even though the first element in
+this vector is`"sad"`).
+
+In R's memory, factors are represented by integers (1, 2), but are more
+informative than integers because factors are self describing: `"happy"`,
+`"sad"` is more descriptive than `1`, and `2`. 
+---
+# Factors 
+----
+
+To see the levels of a factor, we can say
+
+```r
+levels(feeling)
+## [1] "happy" "sad"
+nlevels(feeling)
+## [1] 2
+```
+---
+# The continent factor
+----
+
+Let's get to know the factor we'll be working with today: continent
+
+
+```r
+glimpse(gapminder$continent)
+##  Factor w/ 5 levels "Africa","Americas",..: 3 3 3 3 3 3 3 3 3 3 ...
+levels(gapminder$continent)
+## [1] "Africa"   "Americas" "Asia"     "Europe"   "Oceania"
+nlevels(gapminder$continent)
+## [1] 5
+class(gapminder$continent)
+## [1] "factor"
+```
+
+---
+## reordering factors with forcats &lt;img src="img/forcats.png" class="title-hex"&gt;
+
+Sometimes, the order of the factors does not matter, other times you might want
+to specify the order because it is meaningful (e.g., "low", "medium", "high"),
+it improves your visualization, or it is required by a particular type of
+analysis. 
+
+By default, factor levels are ordered alphabetically. Which might as well be
+random, when you think about it! It is preferable to order the levels according
+to some principle:
+
+  * Frequency. Make the most common level the first and so on.
+  * Another variable. Order factor levels according to a summary statistic for another variable. Example: order Gapminder countries by life expectancy.
+  
+---
+## Manually reorder with fct_relevel &lt;img src="img/forcats.png" class="title-hex"&gt;
+
+.small[Current levels]
+
+```r
+levels(gapminder$continent) 
+## [1] "Africa"   "Americas" "Asia"     "Europe"   "Oceania"
+```
+
+.small[Reorder by population:]
+
+```r
+gapminder &lt;- gapminder %&gt;% 
+  mutate(continent_reordered = fct_relevel(continent, "Asia", "Africa", 
+                                           "Americas", "Europe", "Oceania"))
+```
+
+.small[New levels]
+
+```r
+levels(gapminder$continent_reordered) 
+## [1] "Asia"     "Africa"   "Americas" "Europe"   "Oceania"
+```
+---
+## Automatically reorder with fct_infreq &lt;img src="img/forcats.png" class="title-hex"&gt;
+
+.small[Another way to re-order your factor levels is by frequency, so the most common
+factor levels come first, and the less common come later. (This is often useful
+for plotting!) In this case, it is the frequency of how often each level occurs
+in the variable, as seen in `fct_count(gapminder$continent)`]
+
+
+
+
+```r
+# Current levels
+levels(gapminder$continent)
+## [1] "Africa"   "Americas" "Asia"     "Europe"   "Oceania"
+
+# Reorder by frequency in dataset:
+gapminder &lt;- gapminder %&gt;% 
+  mutate(continent_infreq = fct_infreq(continent, ordered = TRUE))
+
+# New levels
+levels(gapminder$continent_infreq) 
+## [1] "Africa"   "Asia"     "Europe"   "Americas" "Oceania"
+```
+---
+## Automatically reorder based on another variable with fct_reorder &lt;img src="img/forcats.png" class="title-hex"&gt;
+.panelset[
+.panel[.panel-name[fct_reorder]
+What if we want to order the continent factor based on the values of another
+variable? This other variable is usually quantitative and you will order the
+factor according to a grouped summary. The factor is the grouping variable and
+the default summarizing function is `median()` but you can specify something
+else.
+]
+.panel[.panel-name[median life expectancy]
+
+```r
+head(levels(gapminder$country))
+## [1] "Afghanistan" "Albania"     "Algeria"     "Angola"      "Argentina"  
+## [6] "Australia"
+## order countries by median life expectancy
+gapminder &lt;- gapminder %&gt;% 
+  mutate(country_med_lifexp = fct_reorder(country, lifeExp))
+head(levels(gapminder$country_med_lifexp))
+## [1] "Sierra Leone"  "Guinea-Bissau" "Afghanistan"   "Angola"       
+## [5] "Somalia"       "Guinea"
+```
+]
+.panel[.panel-name[max population]
+
+```r
+head(levels(gapminder$country))
+## [1] "Afghanistan" "Albania"     "Algeria"     "Angola"      "Argentina"  
+## [6] "Australia"
+## order according to max population instead of median life expectancy
+gapminder &lt;- gapminder %&gt;% 
+  mutate(country_min_pop = fct_reorder(country, pop, .fun = max))
+head(levels(gapminder$country_min_pop))
+## [1] "Sao Tome and Principe" "Iceland"               "Djibouti"             
+## [4] "Equatorial Guinea"     "Bahrain"               "Comoros"
+```
+]
+]
+---
+template: live-coding
+---
+
+name: your-turn
+background-color: var(--my-red)
+class: inverse
+
+.left-column[
+## Your turn&lt;br&gt;&lt;svg viewBox="0 0 576 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;br&gt;
+]
+
+.right-column[
+### Let's practice forcats!
+----
+With the nhanes dataset, reorder the `MaritalStatus` variables in three ways:
+
+- with `fct_relevel()`, reorder with "NeverMarried", "LivePartner", "Married","Separated", "Divorced", "Widowed"
+- with `fct_infreq()`, reorder based on the frequency. 
+- with `fct_reorder()`, reorder based on the median `PhysActiveDays`
+
+]
+<div class="countdown blink-colon noupdate-15" id="timer_60af2126" style="bottom:0;left:0;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">03</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+---
+## renaming factor levels with fct_recode &lt;img src="img/forcats.png" class="title-hex"&gt;
+
+`forcats` makes easy to rename factor levels. Let's say we made a mistake and
+need to recode "Oceania" to actually be "Australia". We'd use the `fct_recode` function to
+do this.
+
+
+```r
+levels(gapminder$continent)
+## [1] "Africa"   "Americas" "Asia"     "Europe"   "Oceania"
+
+gapminder &lt;- gapminder %&gt;% 
+  mutate(continent_recode = fct_recode(continent, Australia = "Oceania"))
+
+levels(gapminder$continent_recode)
+## [1] "Africa"    "Americas"  "Asia"      "Europe"    "Australia"
+```
+
+---
+## collapsing factor levels into "other" with fct_lump &lt;img src="img/forcats.png" class="title-hex"&gt;
+
+There are many other `forcat` packages for very specific uses - like making an
+"other" factor for rare occurrences with `fct_lump()`. You can also use
+`fct_other()` to manually set factors to equal other or `fct_collapse()` to
+collapse levels into manually defined groups.
+
+Explore [the cheatsheet](https://github.com/rstudio/cheatsheets/blob/master/factors.pdf) so you know what is available!
+
+
+---
+template: break
+
+---
+
+template: question
+
+&lt;svg viewBox="0 0 448 512" style="position:relative;display:inline-block;top:.1em;height:2em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M0 464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V192H0v272zm64-192c0-8.8 7.2-16 16-16h96c8.8 0 16 7.2 16 16v96c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16v-96zM400 64h-48V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H160V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H48C21.5 64 0 85.5 0 112v48h448v-48c0-26.5-21.5-48-48-48z"&gt;&lt;/path&gt;&lt;/svg&gt;
+# How can I work with dates?
+
+---
+# Dates
+
+If you've ever worked with dates in R before, you may know they're somewhat of a mess. Dates / times can be the `Date` class, `POSIXct` class, or `hms` class and it's all sort of confusing. That's where the lubridate package comes in.
+
+
+---
+## Parsing Dates Using lubridate &lt;img src="img/lubridate.png" class="title-hex"&gt;
+----
+lubridate has many "helper" functions which parse dates/times more
+automatically. - The helper *function name specifies the order of the
+components*: year, month, day, hours, minutes, and seconds. The help page for
+`ymd` shows multiple functions to parse **dates** with different sequences of
+**y**ear, **m**onth and **d**ay,
+
+Only the order of year, month, and day matters
+
+```r
+library(lubridate)
+
+ymd(c("2011/01-10", "2011-01/10", "20110110"))
+## [1] "2011-01-10" "2011-01-10" "2011-01-10"
+mdy(c("01/10/2011", "01 adsl; 10 df 2011", "January 10, 2011"))
+## [1] "2011-01-10" "2011-01-10" "2011-01-10"
+```
+---
+## Parsing Times Using lubridate&lt;img src="img/lubridate.png" class="title-hex"&gt;
+----
+For times, only the order of hours, minutes, and seconds matter
+
+```r
+hms(c("10:40:10", "10 40 10"))
+## [1] "10H 40M 10S" "10H 40M 10S"
+```
+---
+## Parsing Date-Times Using lubridate&lt;img src="img/lubridate.png" class="title-hex"&gt;
+----
+Let's parse the following date-times.
+
+
+```r
+t1 &lt;- "05/26/2004 UTC 11:11:11.444" #mdy, hms
+t2 &lt;- "26 2004 05 UTC 11/11/11.444" #dym, hms
+
+mdy_hms(t1)
+## [1] "2004-05-26 11:11:11 UTC"
+
+## No dym_hms() function is defined, so need to use parse_datetime()
+parse_date_time(t2, "d y m H M S")
+## [1] "2004-05-26 11:11:11 UTC"
+```
+
+
+---
+
+name: your-turn
+background-color: var(--my-red)
+class: inverse
+
+.left-column[
+## Your turn&lt;br&gt;&lt;svg viewBox="0 0 576 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;br&gt;
+]
+
+.right-column[
+### Let's practice parsing dates!
+----
+Use the appropriate lubridate function to parse the following dates/times:
+
+```r
+d1 &lt;- "January 1, 2010"
+d2 &lt;- "2015-Mar-07"
+d3 &lt;- "06-Jun-2017"
+d4 &lt;- c("August 19 (2015)", "July 1 (2015)")
+d5 &lt;- "12/30/14 23:14:11" 
+```
+
+]
+<div class="countdown blink-colon noupdate-15" id="timer_60af218a" style="bottom:0;left:0;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">02</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">30</span></code>
+</div>
+
+
+---
+# Extracting date components &lt;img src="img/lubridate.png" class="title-hex"&gt;
+
+.panelset[
+.panel[.panel-name[About]
+To extract the component of a date-time, use one of the following: 
+- `year()` extracts the year
+- `month()` extracts the month
+- `week()` extracts the week
+- `mday()` extracts the day of the month (1, 2, 3, ...)
+- `wday()` extracts the day of the week (Saturday, Sunday, Monday ...)
+- `yday()` extracts the day of the year (1, 2, 3, ...)
+- `hour()` extracts the hour
+- `minute()` extract the minute
+- `second()` extracts the second
+]
+.panel[.panel-name[Examples]
+.pull-left[
+
+```r
+ddat &lt;- mdy_hms("01/02/1970 03:51:44")
+ddat
+## [1] "1970-01-02 03:51:44 UTC"
+year(ddat)
+## [1] 1970
+month(ddat, label = TRUE)
+## [1] Jan
+## 12 Levels: Jan &lt; Feb &lt; Mar &lt; Apr &lt; May &lt; Jun &lt; Jul &lt; Aug &lt; Sep &lt; ... &lt; Dec
+week(ddat)
+## [1] 1
+mday(ddat)
+## [1] 2
+```
+]
+.pull-right[
+
+
+```r
+wday(ddat, label = TRUE)
+## [1] Fri
+## Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat
+yday(ddat)
+## [1] 2
+hour(ddat)
+## [1] 3
+minute(ddat)
+## [1] 51
+second(ddat)
+## [1] 44
+```
+]
+]
+]
+
+---
+## Doing Math with Time ?  &lt;img src="img/lubridate.png" class="title-hex"&gt;
+----
+Humans manipulate "clock time" with the use of policies such as [Daylight
+Savings Time](https://en.wikipedia.org/wiki/Daylight_saving_time) which creates
+irregularities in the "physical time". `lubridate` provides three classes of
+time spans to facilitate math with dates and date-times.
+--
+- **Periods**: track changes in "clock time", and *ignore irregularities* in
+    "physical time". 
+--
+- **Durations**: track the passage of "physical time", which deviates from
+    "clock time" when irregularities occur.
+--
+- **Intervals**: represent specific spans of the timeline, bounded by start
+    and end date-times. We won't cover this in this workshop because I find them
+    to be the least useful, but you can learn more with `?interval-class`
+
+---
+## Periods&lt;img src="img/lubridate.png" class="title-hex"&gt;
+**Periods**: track changes in "clock time", and *ignore irregularities* in "physical time".
+
+Make a period with the name of a time unit pluralized, e.g.
+
+```r
+p &lt;- months(3) + days(12)
+p
+## [1] "3m 12d 0H 0M 0S"
+```
+
+And calculate the duration between two times with basic operators:
+
+```r
+d1 &lt;- mdy("June 13, 2013")
+d2 &lt;- today()
+d2-d1
+## Time difference of 2904 days
+```
+
+
+---
+## Durations&lt;img src="img/lubridate.png" class="title-hex"&gt;
+
+**Durations**: track the passage of "physical time", which deviates from "clock time" when irregularities occur.
+
+Durations are stored as seconds, the only time unit with a consistent length.
+Add or subtract durations to model *physical processes*, like travel or
+lifespan. You can create durations from years with `dyears()`, from days with
+`ddays()`, etc...
+
+
+```r
+dyears(1)
+## [1] "31557600s (~1 years)"
+ddays(1)
+## [1] "86400s (~1 days)"
+dhours(1)
+## [1] "3600s (~1 hours)"
+```
+
+---
+
+name: your-turn
+background-color: var(--my-red)
+class: inverse
+
+.left-column[
+## Your turn&lt;br&gt;&lt;svg viewBox="0 0 576 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;br&gt;
+
+&lt;br&gt;
+&lt;br&gt;
+
+```r
+bike_trips &lt;- read_csv("http://bit.ly/capital_trips", n_max = 1000)
+# this will only read 1000 observations if your computer is a bit slower, 552,399 originally
+```
+]
+.right-column[
+### Day 1 Case Study
+----
+.small[Use the data from the capital_trips_2016.csv below. These data are from a bikesharing program.
+
+- Review the variables with glimpse().
+- Rename variables to conform to “best practices” for variable names i.e., no spaces in the names. Feel free to experiment with the handy janitor::clean_names() function here if you’d like.
+- Convert the start date and end date variables to be date-times.
+- Create a new variable `weekday` where you extract the day of the week based on the start date (use label = TRUE option to get actual days of the week)
+- Use the start date and end date variables to calculate the duration of each trip.
+- Reorder the weekday factor by the median trip duration
+- How much time elapsed between the start of the first trip and the end of the the last trip.]
+]
+
+---
+
+
+
+
+
+
+count: false
+ 
+### Case Study Output
+.panel1-case-study-auto[
+
+```r
+*bike_trips
+```
+]
+ 
+.panel2-case-study-auto[
+
+```
+## # A tibble: 552,399 x 9
+##    `Duration (ms)` `Start date`  `End date`  `Start station n~ `Start station`  
+##              &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;                   &lt;dbl&gt; &lt;chr&gt;            
+##  1          301295 3/31/2016 23~ 4/1/2016 0~             31280 11th &amp; S St NW   
+##  2          557887 3/31/2016 23~ 4/1/2016 0~             31275 New Hampshire Av~
+##  3          555944 3/31/2016 23~ 4/1/2016 0~             31101 14th &amp; V St NW   
+##  4          766916 3/31/2016 23~ 4/1/2016 0~             31226 34th St &amp; Wiscon~
+##  5          139656 3/31/2016 23~ 3/31/2016 ~             31011 23rd &amp; Crystal Dr
+##  6          967713 3/31/2016 23~ 4/1/2016 0~             31266 11th &amp; M St NW   
+##  7          534836 3/31/2016 23~ 4/1/2016 0~             31222 New York Ave &amp; 1~
+##  8          243864 3/31/2016 23~ 4/1/2016 0~             31228 8th &amp; H St NW    
+##  9          372524 3/31/2016 23~ 4/1/2016 0~             31113 Columbia Rd &amp; Be~
+## 10          215194 3/31/2016 23~ 3/31/2016 ~             31263 10th &amp; K St NW   
+## # ... with 552,389 more rows, and 4 more variables: End station number &lt;dbl&gt;,
+## #   End station &lt;chr&gt;, Bike number &lt;chr&gt;, Member Type &lt;chr&gt;
+```
+]
+
+---
+count: false
+ 
+### Case Study Output
+.panel1-case-study-auto[
+
+```r
+bike_trips %&gt;%
+* janitor::clean_names()
+```
+]
+ 
+.panel2-case-study-auto[
+
+```
+## # A tibble: 552,399 x 9
+##    duration_ms start_date    end_date     start_station_nu~ start_station       
+##          &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;                    &lt;dbl&gt; &lt;chr&gt;               
+##  1      301295 3/31/2016 23~ 4/1/2016 0:~             31280 11th &amp; S St NW      
+##  2      557887 3/31/2016 23~ 4/1/2016 0:~             31275 New Hampshire Ave &amp;~
+##  3      555944 3/31/2016 23~ 4/1/2016 0:~             31101 14th &amp; V St NW      
+##  4      766916 3/31/2016 23~ 4/1/2016 0:~             31226 34th St &amp; Wisconsin~
+##  5      139656 3/31/2016 23~ 3/31/2016 2~             31011 23rd &amp; Crystal Dr   
+##  6      967713 3/31/2016 23~ 4/1/2016 0:~             31266 11th &amp; M St NW      
+##  7      534836 3/31/2016 23~ 4/1/2016 0:~             31222 New York Ave &amp; 15th~
+##  8      243864 3/31/2016 23~ 4/1/2016 0:~             31228 8th &amp; H St NW       
+##  9      372524 3/31/2016 23~ 4/1/2016 0:~             31113 Columbia Rd &amp; Belmo~
+## 10      215194 3/31/2016 23~ 3/31/2016 2~             31263 10th &amp; K St NW      
+## # ... with 552,389 more rows, and 4 more variables: end_station_number &lt;dbl&gt;,
+## #   end_station &lt;chr&gt;, bike_number &lt;chr&gt;, member_type &lt;chr&gt;
+```
+]
+
+---
+count: false
+ 
+### Case Study Output
+.panel1-case-study-auto[
+
+```r
+bike_trips %&gt;%
+  janitor::clean_names() %&gt;%
+* select(start_date, end_date)
+```
+]
+ 
+.panel2-case-study-auto[
+
+```
+## # A tibble: 552,399 x 2
+##    start_date      end_date       
+##    &lt;chr&gt;           &lt;chr&gt;          
+##  1 3/31/2016 23:59 4/1/2016 0:04  
+##  2 3/31/2016 23:59 4/1/2016 0:08  
+##  3 3/31/2016 23:59 4/1/2016 0:08  
+##  4 3/31/2016 23:57 4/1/2016 0:09  
+##  5 3/31/2016 23:57 3/31/2016 23:59
+##  6 3/31/2016 23:57 4/1/2016 0:13  
+##  7 3/31/2016 23:57 4/1/2016 0:06  
+##  8 3/31/2016 23:56 4/1/2016 0:00  
+##  9 3/31/2016 23:55 4/1/2016 0:01  
+## 10 3/31/2016 23:55 3/31/2016 23:59
+## # ... with 552,389 more rows
+```
+]
+
+---
+count: false
+ 
+### Case Study Output
+.panel1-case-study-auto[
+
+```r
+bike_trips %&gt;%
+  janitor::clean_names() %&gt;%
+  select(start_date, end_date) %&gt;%
+* mutate(start_date = mdy_hm(start_date))
+```
+]
+ 
+.panel2-case-study-auto[
+
+```
+## # A tibble: 552,399 x 2
+##    start_date          end_date       
+##    &lt;dttm&gt;              &lt;chr&gt;          
+##  1 2016-03-31 23:59:00 4/1/2016 0:04  
+##  2 2016-03-31 23:59:00 4/1/2016 0:08  
+##  3 2016-03-31 23:59:00 4/1/2016 0:08  
+##  4 2016-03-31 23:57:00 4/1/2016 0:09  
+##  5 2016-03-31 23:57:00 3/31/2016 23:59
+##  6 2016-03-31 23:57:00 4/1/2016 0:13  
+##  7 2016-03-31 23:57:00 4/1/2016 0:06  
+##  8 2016-03-31 23:56:00 4/1/2016 0:00  
+##  9 2016-03-31 23:55:00 4/1/2016 0:01  
+## 10 2016-03-31 23:55:00 3/31/2016 23:59
+## # ... with 552,389 more rows
+```
+]
+
+---
+count: false
+ 
+### Case Study Output
+.panel1-case-study-auto[
+
+```r
+bike_trips %&gt;%
+  janitor::clean_names() %&gt;%
+  select(start_date, end_date) %&gt;%
+  mutate(start_date = mdy_hm(start_date)) %&gt;%
+* mutate(end_date = mdy_hm(end_date))
+```
+]
+ 
+.panel2-case-study-auto[
+
+```
+## # A tibble: 552,399 x 2
+##    start_date          end_date           
+##    &lt;dttm&gt;              &lt;dttm&gt;             
+##  1 2016-03-31 23:59:00 2016-04-01 00:04:00
+##  2 2016-03-31 23:59:00 2016-04-01 00:08:00
+##  3 2016-03-31 23:59:00 2016-04-01 00:08:00
+##  4 2016-03-31 23:57:00 2016-04-01 00:09:00
+##  5 2016-03-31 23:57:00 2016-03-31 23:59:00
+##  6 2016-03-31 23:57:00 2016-04-01 00:13:00
+##  7 2016-03-31 23:57:00 2016-04-01 00:06:00
+##  8 2016-03-31 23:56:00 2016-04-01 00:00:00
+##  9 2016-03-31 23:55:00 2016-04-01 00:01:00
+## 10 2016-03-31 23:55:00 2016-03-31 23:59:00
+## # ... with 552,389 more rows
+```
+]
+
+---
+count: false
+ 
+### Case Study Output
+.panel1-case-study-auto[
+
+```r
+bike_trips %&gt;%
+  janitor::clean_names() %&gt;%
+  select(start_date, end_date) %&gt;%
+  mutate(start_date = mdy_hm(start_date)) %&gt;%
+  mutate(end_date = mdy_hm(end_date)) %&gt;%
+* mutate(weekday = wday(start_date, label = TRUE))
+```
+]
+ 
+.panel2-case-study-auto[
+
+```
+## # A tibble: 552,399 x 3
+##    start_date          end_date            weekday
+##    &lt;dttm&gt;              &lt;dttm&gt;              &lt;ord&gt;  
+##  1 2016-03-31 23:59:00 2016-04-01 00:04:00 Thu    
+##  2 2016-03-31 23:59:00 2016-04-01 00:08:00 Thu    
+##  3 2016-03-31 23:59:00 2016-04-01 00:08:00 Thu    
+##  4 2016-03-31 23:57:00 2016-04-01 00:09:00 Thu    
+##  5 2016-03-31 23:57:00 2016-03-31 23:59:00 Thu    
+##  6 2016-03-31 23:57:00 2016-04-01 00:13:00 Thu    
+##  7 2016-03-31 23:57:00 2016-04-01 00:06:00 Thu    
+##  8 2016-03-31 23:56:00 2016-04-01 00:00:00 Thu    
+##  9 2016-03-31 23:55:00 2016-04-01 00:01:00 Thu    
+## 10 2016-03-31 23:55:00 2016-03-31 23:59:00 Thu    
+## # ... with 552,389 more rows
+```
+]
+
+---
+count: false
+ 
+### Case Study Output
+.panel1-case-study-auto[
+
+```r
+bike_trips %&gt;%
+  janitor::clean_names() %&gt;%
+  select(start_date, end_date) %&gt;%
+  mutate(start_date = mdy_hm(start_date)) %&gt;%
+  mutate(end_date = mdy_hm(end_date)) %&gt;%
+  mutate(weekday = wday(start_date, label = TRUE)) %&gt;%
+* mutate(trip_duration = end_date-start_date)
+```
+]
+ 
+.panel2-case-study-auto[
+
+```
+## # A tibble: 552,399 x 4
+##    start_date          end_date            weekday trip_duration
+##    &lt;dttm&gt;              &lt;dttm&gt;              &lt;ord&gt;   &lt;drtn&gt;       
+##  1 2016-03-31 23:59:00 2016-04-01 00:04:00 Thu      5 mins      
+##  2 2016-03-31 23:59:00 2016-04-01 00:08:00 Thu      9 mins      
+##  3 2016-03-31 23:59:00 2016-04-01 00:08:00 Thu      9 mins      
+##  4 2016-03-31 23:57:00 2016-04-01 00:09:00 Thu     12 mins      
+##  5 2016-03-31 23:57:00 2016-03-31 23:59:00 Thu      2 mins      
+##  6 2016-03-31 23:57:00 2016-04-01 00:13:00 Thu     16 mins      
+##  7 2016-03-31 23:57:00 2016-04-01 00:06:00 Thu      9 mins      
+##  8 2016-03-31 23:56:00 2016-04-01 00:00:00 Thu      4 mins      
+##  9 2016-03-31 23:55:00 2016-04-01 00:01:00 Thu      6 mins      
+## 10 2016-03-31 23:55:00 2016-03-31 23:59:00 Thu      4 mins      
+## # ... with 552,389 more rows
+```
+]
+
+---
+count: false
+ 
+### Case Study Output
+.panel1-case-study-auto[
+
+```r
+bike_trips %&gt;%
+  janitor::clean_names() %&gt;%
+  select(start_date, end_date) %&gt;%
+  mutate(start_date = mdy_hm(start_date)) %&gt;%
+  mutate(end_date = mdy_hm(end_date)) %&gt;%
+  mutate(weekday = wday(start_date, label = TRUE)) %&gt;%
+  mutate(trip_duration = end_date-start_date) %&gt;%
+* mutate(weekday = fct_reorder(weekday, trip_duration))
+```
+]
+ 
+.panel2-case-study-auto[
+
+```
+## # A tibble: 552,399 x 4
+##    start_date          end_date            weekday trip_duration
+##    &lt;dttm&gt;              &lt;dttm&gt;              &lt;ord&gt;   &lt;drtn&gt;       
+##  1 2016-03-31 23:59:00 2016-04-01 00:04:00 Thu      5 mins      
+##  2 2016-03-31 23:59:00 2016-04-01 00:08:00 Thu      9 mins      
+##  3 2016-03-31 23:59:00 2016-04-01 00:08:00 Thu      9 mins      
+##  4 2016-03-31 23:57:00 2016-04-01 00:09:00 Thu     12 mins      
+##  5 2016-03-31 23:57:00 2016-03-31 23:59:00 Thu      2 mins      
+##  6 2016-03-31 23:57:00 2016-04-01 00:13:00 Thu     16 mins      
+##  7 2016-03-31 23:57:00 2016-04-01 00:06:00 Thu      9 mins      
+##  8 2016-03-31 23:56:00 2016-04-01 00:00:00 Thu      4 mins      
+##  9 2016-03-31 23:55:00 2016-04-01 00:01:00 Thu      6 mins      
+## 10 2016-03-31 23:55:00 2016-03-31 23:59:00 Thu      4 mins      
+## # ... with 552,389 more rows
+```
+]
+
+---
+count: false
+ 
+### Case Study Output
+.panel1-case-study-auto[
+
+```r
+bike_trips %&gt;%
+  janitor::clean_names() %&gt;%
+  select(start_date, end_date) %&gt;%
+  mutate(start_date = mdy_hm(start_date)) %&gt;%
+  mutate(end_date = mdy_hm(end_date)) %&gt;%
+  mutate(weekday = wday(start_date, label = TRUE)) %&gt;%
+  mutate(trip_duration = end_date-start_date) %&gt;%
+  mutate(weekday = fct_reorder(weekday, trip_duration)) %&gt;%
+* summarize(first_trip = min(start_date),
+*           last_trip = max(end_date))
+```
+]
+ 
+.panel2-case-study-auto[
+
+```
+## # A tibble: 1 x 2
+##   first_trip          last_trip          
+##   &lt;dttm&gt;              &lt;dttm&gt;             
+## 1 2016-01-01 00:06:00 2016-04-01 17:28:00
+```
+]
+
+---
+count: false
+ 
+### Case Study Output
+.panel1-case-study-auto[
+
+```r
+bike_trips %&gt;%
+  janitor::clean_names() %&gt;%
+  select(start_date, end_date) %&gt;%
+  mutate(start_date = mdy_hm(start_date)) %&gt;%
+  mutate(end_date = mdy_hm(end_date)) %&gt;%
+  mutate(weekday = wday(start_date, label = TRUE)) %&gt;%
+  mutate(trip_duration = end_date-start_date) %&gt;%
+  mutate(weekday = fct_reorder(weekday, trip_duration)) %&gt;%
+  summarize(first_trip = min(start_date),
+            last_trip = max(end_date)) %&gt;%
+* mutate(elapsed_time = last_trip-first_trip)
+```
+]
+ 
+.panel2-case-study-auto[
+
+```
+## # A tibble: 1 x 3
+##   first_trip          last_trip           elapsed_time 
+##   &lt;dttm&gt;              &lt;dttm&gt;              &lt;drtn&gt;       
+## 1 2016-01-01 00:06:00 2016-04-01 17:28:00 91.72361 days
+```
+]
+
+&lt;style&gt;
+.panel1-case-study-auto {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-case-study-auto {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-case-study-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+---
+
+class: left
+
+# Up Next &lt;img src="img/purrr.png" class="title-hex"&gt;&lt;img src="img/dplyr.png" class="title-hex"&gt;
+----
+.pull-left[
+### Day 3
+- relational data &amp; joins
+- `across()`
+- `rowwise()`
+- `distinct()`
+- `purrr()`
+]
+
+---
+
+class: goodbye-slide, inverse, middle, left
+
+.pull-left[
+&lt;img src="https://kelseygonzalez.github.io/author/kelsey-e.-gonzalez/avatar.png" class = "rounded"/&gt;
+
+# Thank you!
+
+### Here's where you can find me...
+
+.right[
+[kelseygonzalez.github.io &lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"&gt;&lt;/path&gt;&lt;/svg&gt;](https://kelseygonzalez.github.io/)&lt;br/&gt;
+[@KelseyEGonzalez &lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"&gt;&lt;/path&gt;&lt;/svg&gt;](https://twitter.com/kelseyegonzalez)&lt;br/&gt;
+[@KelseyGonzalez &lt;svg viewBox="0 0 496 512" style="position:relative;display:inline-block;top:.1em;height:1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"&gt;&lt;/path&gt;&lt;/svg&gt;](https://github.com/KelseyGonzalez)
+]]
+
+---
+class: inverse, middle, left
+
+## Acknowledgements:
+[Slide template](https://spcanelon.github.io/xaringan-basics-and-beyond/)  
+[Lecture structure](https://american-stat-412612.netlify.app/)  
+[xaringan](https://github.com/yihui/xaringan)  
+[xaringanExtra](https://pkg.garrickadenbuie.com/xaringanExtra/#/)  
+[flipbookr](https://github.com/EvaMaeRey/flipbookr)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "googlecode",
+"highlightLines": true,
+"highlightLanguage": "r",
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

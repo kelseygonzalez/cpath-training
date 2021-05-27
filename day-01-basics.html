@@ -147,26 +147,32 @@ We will use the US National Health and Nutrition Examination Study for this work
 ```r
 NHANES::NHANESraw %&gt;% head()
 ## # A tibble: 6 x 78
-##      ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education    MaritalStatus HHIncome   HHIncomeMid Poverty
-##   &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;        &lt;fct&gt;         &lt;fct&gt;            &lt;int&gt;   &lt;dbl&gt;
-## 1 51624 2009_10  male      34       409 White   &lt;NA&gt;  High School  Married       25000-349~       30000    1.36
-## 2 51625 2009_10  male       4        49 Other   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          20000-249~       22500    1.07
-## 3 51626 2009_10  male      16       202 Black   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          45000-549~       50000    2.27
-## 4 51627 2009_10  male      10       131 Black   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          20000-249~       22500    0.81
-## 5 51628 2009_10  female    60       722 Black   &lt;NA&gt;  High School  Widowed       10000-149~       12500    0.69
-## 6 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th Gr~ Married       25000-349~       30000    1.01
-## # ... with 66 more variables: HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;, Length &lt;dbl&gt;,
-## #   HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
-## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;,
-## #   BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
-## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;, HealthGen &lt;fct&gt;,
-## #   DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;, LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;,
-## #   nBabies &lt;int&gt;, Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;, PhysActive &lt;fct&gt;,
-## #   PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;, TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;,
-## #   Alcohol12PlusYr &lt;fct&gt;, AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
-## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;, AgeRegMarij &lt;int&gt;,
-## #   HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;, SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
-## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;, SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;
+##      ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education    MaritalStatus
+##   &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;        &lt;fct&gt;        
+## 1 51624 2009_10  male      34       409 White   &lt;NA&gt;  High School  Married      
+## 2 51625 2009_10  male       4        49 Other   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;         
+## 3 51626 2009_10  male      16       202 Black   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;         
+## 4 51627 2009_10  male      10       131 Black   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;         
+## 5 51628 2009_10  female    60       722 Black   &lt;NA&gt;  High School  Widowed      
+## 6 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th Gr~ Married      
+## # ... with 69 more variables: HHIncome &lt;fct&gt;, HHIncomeMid &lt;int&gt;, Poverty &lt;dbl&gt;,
+## #   HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;, Length &lt;dbl&gt;,
+## #   HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;,
+## #   BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;, BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;,
+## #   BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;,
+## #   Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;,
+## #   UrineFlow1 &lt;dbl&gt;, UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;,
+## #   DiabetesAge &lt;int&gt;, HealthGen &lt;fct&gt;, DaysPhysHlthBad &lt;int&gt;,
+## #   DaysMentHlthBad &lt;int&gt;, LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;,
+## #   nPregnancies &lt;int&gt;, nBabies &lt;int&gt;, Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;,
+## #   SleepTrouble &lt;fct&gt;, PhysActive &lt;fct&gt;, PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;,
+## #   CompHrsDay &lt;fct&gt;, TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;,
+## #   Alcohol12PlusYr &lt;fct&gt;, AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;,
+## #   Smoke100 &lt;fct&gt;, SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;,
+## #   RegularMarij &lt;fct&gt;, AgeRegMarij &lt;int&gt;, HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;,
+## #   SexAge &lt;int&gt;, SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
+## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;,
+## #   SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;
 ```
 
 ---
@@ -200,84 +206,84 @@ To see more descriptions, type `?NHANES` in the console
 ```
 ## Rows: 20,293
 ## Columns: 78
-## $ ID               &lt;int&gt; 51624, 51625, 51626, 51627, 51628, 51629, 51630, 51631, 51632, 51633, 51634, 51635, ~
-## $ SurveyYr         &lt;fct&gt; 2009_10, 2009_10, 2009_10, 2009_10, 2009_10, 2009_10, 2009_10, 2009_10, 2009_10, 200~
-## $ Gender           &lt;fct&gt; male, male, male, male, female, male, female, female, male, male, male, male, male, ~
-## $ Age              &lt;int&gt; 34, 4, 16, 10, 60, 26, 49, 1, 10, 80, 10, 80, 4, 35, 9, 4, 17, 13, 7, 42, 0, 66, 8, ~
-## $ AgeMonths        &lt;int&gt; 409, 49, 202, 131, 722, 313, 596, 12, 124, NA, 121, NA, 48, 431, 115, 58, 208, 156, ~
-## $ Race1            &lt;fct&gt; White, Other, Black, Black, Black, Mexican, White, White, Hispanic, White, Mexican, ~
-## $ Race3            &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ~
-## $ Education        &lt;fct&gt; High School, NA, NA, NA, High School, 9 - 11th Grade, Some College, NA, NA, Some Col~
-## $ MaritalStatus    &lt;fct&gt; Married, NA, NA, NA, Widowed, Married, LivePartner, NA, NA, Married, NA, Widowed, NA~
-## $ HHIncome         &lt;fct&gt; 25000-34999, 20000-24999, 45000-54999, 20000-24999, 10000-14999, 25000-34999, 35000-~
-## $ HHIncomeMid      &lt;int&gt; 30000, 22500, 50000, 22500, 12500, 30000, 40000, 40000, 70000, 17500, 22500, 17500, ~
-## $ Poverty          &lt;dbl&gt; 1.36, 1.07, 2.27, 0.81, 0.69, 1.01, 1.91, 1.36, 2.68, 1.27, 0.93, 1.69, 1.36, NA, 1.~
-## $ HomeRooms        &lt;int&gt; 6, 9, 5, 6, 6, 4, 5, 5, 7, 4, 5, 5, 7, NA, 6, 6, 5, 6, 4, 6, 9, 5, 7, 6, 4, 7, 5, 7,~
-## $ HomeOwn          &lt;fct&gt; Own, Own, Own, Rent, Rent, Rent, Rent, Rent, Own, Own, Own, Own, Own, NA, Rent, Rent~
-## $ Work             &lt;fct&gt; NotWorking, NA, NotWorking, NA, NotWorking, Working, NotWorking, NA, NA, NotWorking,~
-## $ Weight           &lt;dbl&gt; 87.4, 17.0, 72.3, 39.8, 116.8, 97.6, 86.7, 9.4, 26.0, 79.1, 44.7, 89.6, NA, NA, 29.8~
-## $ Length           &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, 75.7, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 72~
-## $ HeadCirc         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ~
-## $ Height           &lt;dbl&gt; 164.7, 105.4, 181.3, 147.8, 166.0, 173.0, 168.4, NA, 140.3, 174.3, 143.6, 180.1, NA,~
-## $ BMI              &lt;dbl&gt; 32.22, 15.30, 22.00, 18.22, 42.39, 32.61, 30.57, NA, 13.21, 26.04, 21.68, 27.62, NA,~
-## $ BMICatUnder20yrs &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ~
-## $ BMI_WHO          &lt;fct&gt; 30.0_plus, 12.0_18.5, 18.5_to_24.9, 12.0_18.5, 30.0_plus, 30.0_plus, 30.0_plus, NA, ~
-## $ Pulse            &lt;int&gt; 70, NA, 68, 68, 72, 72, 86, NA, 70, 88, 84, 54, NA, NA, 82, NA, 68, 102, NA, 86, NA,~
-## $ BPSysAve         &lt;int&gt; 113, NA, 109, 93, 150, 104, 112, NA, 108, 139, 94, 121, NA, NA, 86, NA, 114, 112, NA~
-## $ BPDiaAve         &lt;int&gt; 85, NA, 59, 41, 68, 49, 75, NA, 53, 43, 45, 60, NA, NA, 47, NA, 78, 37, NA, 100, NA,~
-## $ BPSys1           &lt;int&gt; 114, NA, 112, 92, 154, 102, 118, NA, 106, 142, 94, 126, NA, NA, 84, NA, 122, 106, NA~
-## $ BPDia1           &lt;int&gt; 88, NA, 62, 36, 70, 50, 82, NA, 60, 62, 38, 62, NA, NA, 50, NA, 76, 12, NA, NA, NA, ~
-## $ BPSys2           &lt;int&gt; 114, NA, 114, 94, 150, 104, 108, NA, 106, 140, 92, 124, NA, NA, 84, NA, 112, 110, NA~
-## $ BPDia2           &lt;int&gt; 88, NA, 60, 44, 68, 48, 74, NA, 50, 46, 40, 62, NA, NA, 50, NA, 82, 38, NA, 100, NA,~
-## $ BPSys3           &lt;int&gt; 112, NA, 104, 92, 150, 104, 116, NA, 110, 138, 96, 118, NA, NA, 88, NA, 116, 114, NA~
-## $ BPDia3           &lt;int&gt; 82, NA, 58, 38, 68, 50, 76, NA, 56, 40, 50, 58, NA, NA, 44, NA, 74, 36, NA, NA, NA, ~
-## $ Testosterone     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ~
-## $ DirectChol       &lt;dbl&gt; 1.29, NA, 1.55, 1.89, 1.16, 1.16, 1.16, NA, 1.58, 1.94, 1.60, 1.27, NA, NA, 1.34, NA~
-## $ TotChol          &lt;dbl&gt; 3.49, NA, 4.97, 4.16, 5.22, 4.14, 6.70, NA, 4.14, 4.71, 2.87, 3.83, NA, NA, 4.86, NA~
-## $ UrineVol1        &lt;int&gt; 352, NA, 281, 139, 30, 202, 77, NA, 39, 128, 109, 38, NA, NA, 123, NA, 315, 290, 60,~
-## $ UrineFlow1       &lt;dbl&gt; NA, NA, 0.415, 1.078, 0.476, 0.563, 0.094, NA, 0.300, 1.208, 0.956, 0.197, NA, NA, 1~
-## $ UrineVol2        &lt;int&gt; NA, NA, NA, NA, 246, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,~
-## $ UrineFlow2       &lt;dbl&gt; NA, NA, NA, NA, 2.51, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA~
-## $ Diabetes         &lt;fct&gt; No, No, No, No, Yes, No, No, No, No, No, No, Yes, No, No, No, No, No, No, No, Yes, N~
-## $ DiabetesAge      &lt;int&gt; NA, NA, NA, NA, 56, NA, NA, NA, NA, NA, NA, 70, NA, NA, NA, NA, NA, NA, NA, 34, NA, ~
-## $ HealthGen        &lt;fct&gt; Good, NA, Vgood, NA, Fair, Good, Good, NA, NA, Excellent, NA, Good, NA, NA, NA, NA, ~
-## $ DaysPhysHlthBad  &lt;int&gt; 0, NA, 2, NA, 20, 2, 0, NA, NA, 0, NA, 0, NA, NA, NA, NA, 0, 0, NA, 0, NA, 0, NA, 0,~
-## $ DaysMentHlthBad  &lt;int&gt; 15, NA, 0, NA, 25, 14, 10, NA, NA, 0, NA, 0, NA, NA, NA, NA, 18, 2, NA, 30, NA, 0, N~
-## $ LittleInterest   &lt;fct&gt; Most, NA, NA, NA, Most, None, Several, NA, NA, None, NA, None, NA, NA, NA, NA, NA, N~
-## $ Depressed        &lt;fct&gt; Several, NA, NA, NA, Most, Most, Several, NA, NA, None, NA, None, NA, NA, NA, NA, NA~
-## $ nPregnancies     &lt;int&gt; NA, NA, NA, NA, 1, NA, 2, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 2, NA, NA,~
-## $ nBabies          &lt;int&gt; NA, NA, NA, NA, 1, NA, 2, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 2, NA, NA,~
-## $ Age1stBaby       &lt;int&gt; NA, NA, NA, NA, NA, NA, 27, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 18, NA, ~
-## $ SleepHrsNight    &lt;int&gt; 4, NA, 8, NA, 4, 4, 8, NA, NA, 6, NA, 9, NA, 7, NA, NA, 7, NA, NA, 10, NA, 7, NA, 8,~
-## $ SleepTrouble     &lt;fct&gt; Yes, NA, No, NA, No, No, Yes, NA, NA, No, NA, No, NA, No, NA, NA, No, NA, NA, Yes, N~
-## $ PhysActive       &lt;fct&gt; No, NA, Yes, NA, No, Yes, No, NA, NA, Yes, NA, No, NA, No, NA, NA, Yes, Yes, NA, No,~
-## $ PhysActiveDays   &lt;int&gt; NA, NA, 5, NA, NA, 2, NA, NA, NA, 4, NA, NA, NA, NA, NA, NA, 6, 2, NA, NA, NA, NA, N~
-## $ TVHrsDay         &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ~
-## $ CompHrsDay       &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ~
-## $ TVHrsDayChild    &lt;int&gt; NA, 4, NA, 1, NA, NA, NA, NA, 1, NA, 3, NA, 2, NA, 5, 2, NA, NA, 2, NA, NA, NA, 1, N~
-## $ CompHrsDayChild  &lt;int&gt; NA, 1, NA, 1, NA, NA, NA, NA, 0, NA, 0, NA, 1, NA, 0, 0, NA, NA, 6, NA, NA, NA, 6, N~
-## $ Alcohol12PlusYr  &lt;fct&gt; Yes, NA, NA, NA, No, Yes, Yes, NA, NA, Yes, NA, No, NA, NA, NA, NA, NA, NA, NA, No, ~
-## $ AlcoholDay       &lt;int&gt; NA, NA, NA, NA, NA, 19, 2, NA, NA, 1, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 8,~
-## $ AlcoholYear      &lt;int&gt; 0, NA, NA, NA, 0, 48, 20, NA, NA, 52, NA, 0, NA, NA, NA, NA, NA, NA, NA, 0, NA, 104,~
-## $ SmokeNow         &lt;fct&gt; No, NA, NA, NA, Yes, No, Yes, NA, NA, No, NA, No, NA, NA, NA, NA, NA, NA, NA, NA, NA~
-## $ Smoke100         &lt;fct&gt; Yes, NA, NA, NA, Yes, Yes, Yes, NA, NA, Yes, NA, Yes, NA, No, NA, NA, NA, NA, NA, No~
-## $ SmokeAge         &lt;int&gt; 18, NA, NA, NA, 16, 15, 38, NA, NA, 16, NA, 21, NA, NA, NA, NA, NA, NA, NA, NA, NA, ~
-## $ Marijuana        &lt;fct&gt; Yes, NA, NA, NA, NA, Yes, Yes, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, No, N~
-## $ AgeFirstMarij    &lt;int&gt; 17, NA, NA, NA, NA, 10, 18, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ~
-## $ RegularMarij     &lt;fct&gt; No, NA, NA, NA, NA, Yes, No, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,~
-## $ AgeRegMarij      &lt;int&gt; NA, NA, NA, NA, NA, 12, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ~
-## $ HardDrugs        &lt;fct&gt; Yes, NA, NA, NA, No, Yes, Yes, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, No, N~
-## $ SexEver          &lt;fct&gt; Yes, NA, NA, NA, Yes, Yes, Yes, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, Yes,~
-## $ SexAge           &lt;int&gt; 16, NA, NA, NA, 15, 9, 12, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 18, NA, 1~
-## $ SexNumPartnLife  &lt;int&gt; 8, NA, NA, NA, 4, 10, 10, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 100, NA, 1~
-## $ SexNumPartYear   &lt;int&gt; 1, NA, NA, NA, NA, 1, 1, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 1, NA, NA, ~
-## $ SameSex          &lt;fct&gt; No, NA, NA, NA, No, No, Yes, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, No, NA,~
-## $ SexOrientation   &lt;fct&gt; Heterosexual, NA, NA, NA, NA, Heterosexual, Heterosexual, NA, NA, NA, NA, NA, NA, NA~
-## $ WTINT2YR         &lt;dbl&gt; 80100.544, 53901.104, 13953.078, 11664.899, 20090.339, 22537.827, 74212.270, 23306.3~
-## $ WTMEC2YR         &lt;dbl&gt; 81528.772, 56995.035, 14509.279, 12041.635, 21000.339, 22633.582, 74112.487, 24776.4~
-## $ SDMVPSU          &lt;int&gt; 1, 2, 1, 2, 2, 1, 2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 1, 1, 2, 2, 2, 1, 1, 2, 1, 2, 1, 2, ~
-## $ SDMVSTRA         &lt;int&gt; 83, 79, 84, 86, 75, 88, 85, 86, 88, 77, 86, 79, 84, 77, 88, 89, 81, 79, 88, 75, 80, ~
-## $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, Unknown, NA, NA, NA, NA, NA, No,~
+## $ ID               &lt;int&gt; 51624, 51625, 51626, 51627, 51628, 51629, 51630, 5163~
+## $ SurveyYr         &lt;fct&gt; 2009_10, 2009_10, 2009_10, 2009_10, 2009_10, 2009_10,~
+## $ Gender           &lt;fct&gt; male, male, male, male, female, male, female, female,~
+## $ Age              &lt;int&gt; 34, 4, 16, 10, 60, 26, 49, 1, 10, 80, 10, 80, 4, 35, ~
+## $ AgeMonths        &lt;int&gt; 409, 49, 202, 131, 722, 313, 596, 12, 124, NA, 121, N~
+## $ Race1            &lt;fct&gt; White, Other, Black, Black, Black, Mexican, White, Wh~
+## $ Race3            &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N~
+## $ Education        &lt;fct&gt; High School, NA, NA, NA, High School, 9 - 11th Grade,~
+## $ MaritalStatus    &lt;fct&gt; Married, NA, NA, NA, Widowed, Married, LivePartner, N~
+## $ HHIncome         &lt;fct&gt; 25000-34999, 20000-24999, 45000-54999, 20000-24999, 1~
+## $ HHIncomeMid      &lt;int&gt; 30000, 22500, 50000, 22500, 12500, 30000, 40000, 4000~
+## $ Poverty          &lt;dbl&gt; 1.36, 1.07, 2.27, 0.81, 0.69, 1.01, 1.91, 1.36, 2.68,~
+## $ HomeRooms        &lt;int&gt; 6, 9, 5, 6, 6, 4, 5, 5, 7, 4, 5, 5, 7, NA, 6, 6, 5, 6~
+## $ HomeOwn          &lt;fct&gt; Own, Own, Own, Rent, Rent, Rent, Rent, Rent, Own, Own~
+## $ Work             &lt;fct&gt; NotWorking, NA, NotWorking, NA, NotWorking, Working, ~
+## $ Weight           &lt;dbl&gt; 87.4, 17.0, 72.3, 39.8, 116.8, 97.6, 86.7, 9.4, 26.0,~
+## $ Length           &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, 75.7, NA, NA, NA, NA, NA,~
+## $ HeadCirc         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N~
+## $ Height           &lt;dbl&gt; 164.7, 105.4, 181.3, 147.8, 166.0, 173.0, 168.4, NA, ~
+## $ BMI              &lt;dbl&gt; 32.22, 15.30, 22.00, 18.22, 42.39, 32.61, 30.57, NA, ~
+## $ BMICatUnder20yrs &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N~
+## $ BMI_WHO          &lt;fct&gt; 30.0_plus, 12.0_18.5, 18.5_to_24.9, 12.0_18.5, 30.0_p~
+## $ Pulse            &lt;int&gt; 70, NA, 68, 68, 72, 72, 86, NA, 70, 88, 84, 54, NA, N~
+## $ BPSysAve         &lt;int&gt; 113, NA, 109, 93, 150, 104, 112, NA, 108, 139, 94, 12~
+## $ BPDiaAve         &lt;int&gt; 85, NA, 59, 41, 68, 49, 75, NA, 53, 43, 45, 60, NA, N~
+## $ BPSys1           &lt;int&gt; 114, NA, 112, 92, 154, 102, 118, NA, 106, 142, 94, 12~
+## $ BPDia1           &lt;int&gt; 88, NA, 62, 36, 70, 50, 82, NA, 60, 62, 38, 62, NA, N~
+## $ BPSys2           &lt;int&gt; 114, NA, 114, 94, 150, 104, 108, NA, 106, 140, 92, 12~
+## $ BPDia2           &lt;int&gt; 88, NA, 60, 44, 68, 48, 74, NA, 50, 46, 40, 62, NA, N~
+## $ BPSys3           &lt;int&gt; 112, NA, 104, 92, 150, 104, 116, NA, 110, 138, 96, 11~
+## $ BPDia3           &lt;int&gt; 82, NA, 58, 38, 68, 50, 76, NA, 56, 40, 50, 58, NA, N~
+## $ Testosterone     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N~
+## $ DirectChol       &lt;dbl&gt; 1.29, NA, 1.55, 1.89, 1.16, 1.16, 1.16, NA, 1.58, 1.9~
+## $ TotChol          &lt;dbl&gt; 3.49, NA, 4.97, 4.16, 5.22, 4.14, 6.70, NA, 4.14, 4.7~
+## $ UrineVol1        &lt;int&gt; 352, NA, 281, 139, 30, 202, 77, NA, 39, 128, 109, 38,~
+## $ UrineFlow1       &lt;dbl&gt; NA, NA, 0.415, 1.078, 0.476, 0.563, 0.094, NA, 0.300,~
+## $ UrineVol2        &lt;int&gt; NA, NA, NA, NA, 246, NA, NA, NA, NA, NA, NA, NA, NA, ~
+## $ UrineFlow2       &lt;dbl&gt; NA, NA, NA, NA, 2.51, NA, NA, NA, NA, NA, NA, NA, NA,~
+## $ Diabetes         &lt;fct&gt; No, No, No, No, Yes, No, No, No, No, No, No, Yes, No,~
+## $ DiabetesAge      &lt;int&gt; NA, NA, NA, NA, 56, NA, NA, NA, NA, NA, NA, 70, NA, N~
+## $ HealthGen        &lt;fct&gt; Good, NA, Vgood, NA, Fair, Good, Good, NA, NA, Excell~
+## $ DaysPhysHlthBad  &lt;int&gt; 0, NA, 2, NA, 20, 2, 0, NA, NA, 0, NA, 0, NA, NA, NA,~
+## $ DaysMentHlthBad  &lt;int&gt; 15, NA, 0, NA, 25, 14, 10, NA, NA, 0, NA, 0, NA, NA, ~
+## $ LittleInterest   &lt;fct&gt; Most, NA, NA, NA, Most, None, Several, NA, NA, None, ~
+## $ Depressed        &lt;fct&gt; Several, NA, NA, NA, Most, Most, Several, NA, NA, Non~
+## $ nPregnancies     &lt;int&gt; NA, NA, NA, NA, 1, NA, 2, NA, NA, NA, NA, NA, NA, NA,~
+## $ nBabies          &lt;int&gt; NA, NA, NA, NA, 1, NA, 2, NA, NA, NA, NA, NA, NA, NA,~
+## $ Age1stBaby       &lt;int&gt; NA, NA, NA, NA, NA, NA, 27, NA, NA, NA, NA, NA, NA, N~
+## $ SleepHrsNight    &lt;int&gt; 4, NA, 8, NA, 4, 4, 8, NA, NA, 6, NA, 9, NA, 7, NA, N~
+## $ SleepTrouble     &lt;fct&gt; Yes, NA, No, NA, No, No, Yes, NA, NA, No, NA, No, NA,~
+## $ PhysActive       &lt;fct&gt; No, NA, Yes, NA, No, Yes, No, NA, NA, Yes, NA, No, NA~
+## $ PhysActiveDays   &lt;int&gt; NA, NA, 5, NA, NA, 2, NA, NA, NA, 4, NA, NA, NA, NA, ~
+## $ TVHrsDay         &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N~
+## $ CompHrsDay       &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N~
+## $ TVHrsDayChild    &lt;int&gt; NA, 4, NA, 1, NA, NA, NA, NA, 1, NA, 3, NA, 2, NA, 5,~
+## $ CompHrsDayChild  &lt;int&gt; NA, 1, NA, 1, NA, NA, NA, NA, 0, NA, 0, NA, 1, NA, 0,~
+## $ Alcohol12PlusYr  &lt;fct&gt; Yes, NA, NA, NA, No, Yes, Yes, NA, NA, Yes, NA, No, N~
+## $ AlcoholDay       &lt;int&gt; NA, NA, NA, NA, NA, 19, 2, NA, NA, 1, NA, NA, NA, NA,~
+## $ AlcoholYear      &lt;int&gt; 0, NA, NA, NA, 0, 48, 20, NA, NA, 52, NA, 0, NA, NA, ~
+## $ SmokeNow         &lt;fct&gt; No, NA, NA, NA, Yes, No, Yes, NA, NA, No, NA, No, NA,~
+## $ Smoke100         &lt;fct&gt; Yes, NA, NA, NA, Yes, Yes, Yes, NA, NA, Yes, NA, Yes,~
+## $ SmokeAge         &lt;int&gt; 18, NA, NA, NA, 16, 15, 38, NA, NA, 16, NA, 21, NA, N~
+## $ Marijuana        &lt;fct&gt; Yes, NA, NA, NA, NA, Yes, Yes, NA, NA, NA, NA, NA, NA~
+## $ AgeFirstMarij    &lt;int&gt; 17, NA, NA, NA, NA, 10, 18, NA, NA, NA, NA, NA, NA, N~
+## $ RegularMarij     &lt;fct&gt; No, NA, NA, NA, NA, Yes, No, NA, NA, NA, NA, NA, NA, ~
+## $ AgeRegMarij      &lt;int&gt; NA, NA, NA, NA, NA, 12, NA, NA, NA, NA, NA, NA, NA, N~
+## $ HardDrugs        &lt;fct&gt; Yes, NA, NA, NA, No, Yes, Yes, NA, NA, NA, NA, NA, NA~
+## $ SexEver          &lt;fct&gt; Yes, NA, NA, NA, Yes, Yes, Yes, NA, NA, NA, NA, NA, N~
+## $ SexAge           &lt;int&gt; 16, NA, NA, NA, 15, 9, 12, NA, NA, NA, NA, NA, NA, NA~
+## $ SexNumPartnLife  &lt;int&gt; 8, NA, NA, NA, 4, 10, 10, NA, NA, NA, NA, NA, NA, NA,~
+## $ SexNumPartYear   &lt;int&gt; 1, NA, NA, NA, NA, 1, 1, NA, NA, NA, NA, NA, NA, NA, ~
+## $ SameSex          &lt;fct&gt; No, NA, NA, NA, No, No, Yes, NA, NA, NA, NA, NA, NA, ~
+## $ SexOrientation   &lt;fct&gt; Heterosexual, NA, NA, NA, NA, Heterosexual, Heterosex~
+## $ WTINT2YR         &lt;dbl&gt; 80100.544, 53901.104, 13953.078, 11664.899, 20090.339~
+## $ WTMEC2YR         &lt;dbl&gt; 81528.772, 56995.035, 14509.279, 12041.635, 21000.339~
+## $ SDMVPSU          &lt;int&gt; 1, 2, 1, 2, 2, 1, 2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 1, 1,~
+## $ SDMVSTRA         &lt;int&gt; 83, 79, 84, 86, 75, 88, 85, 86, 88, 77, 86, 79, 84, 7~
+## $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, U~
 ```
 
 ---
@@ -614,7 +620,7 @@ Here are some options to consider
 - Can you use a tidy selection helpers?
 - Can you combine two of the above techniques together? 
 ]
-<div class="countdown blink-colon noupdate-15" id="timer_60ada528" style="bottom:0;left:0;" data-warnwhen="0">
+<div class="countdown blink-colon noupdate-15" id="timer_60aed17d" style="bottom:0;left:0;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">03</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 ---
@@ -692,6 +698,11 @@ The filter function works with most boolean operators, namely:
 &lt;/table&gt;
 
 ---
+# Filter &lt;img src="img/dplyr.png" class="title-hex"&gt;
+----
+&lt;img src="img/logic-venn.png" width="553" /&gt;
+
+---
 
 template: live-coding
 
@@ -712,7 +723,7 @@ Here are some options to attempt: Can you only show the rows...
 - Where `SmokeNow` is missing? not missing? 
 - Can you combine the above filters together? 
 ]
-<div class="countdown blink-colon noupdate-15" id="timer_60ada5c8" style="bottom:0;left:0;" data-warnwhen="0">
+<div class="countdown blink-colon noupdate-15" id="timer_60aed1de" style="bottom:0;left:0;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">03</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -787,30 +798,37 @@ count: false
 
 ```
 ## # A tibble: 20,293 x 78
-##       ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education    MaritalStatus HHIncome  HHIncomeMid Poverty
-##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;        &lt;fct&gt;         &lt;fct&gt;           &lt;int&gt;   &lt;dbl&gt;
-##  1 51624 2009_10  male      34       409 White   &lt;NA&gt;  High School  Married       25000-34~       30000    1.36
-##  2 51625 2009_10  male       4        49 Other   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          20000-24~       22500    1.07
-##  3 51626 2009_10  male      16       202 Black   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          45000-54~       50000    2.27
-##  4 51627 2009_10  male      10       131 Black   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          20000-24~       22500    0.81
-##  5 51628 2009_10  female    60       722 Black   &lt;NA&gt;  High School  Widowed       10000-14~       12500    0.69
-##  6 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th Gr~ Married       25000-34~       30000    1.01
-##  7 51630 2009_10  female    49       596 White   &lt;NA&gt;  Some College LivePartner   35000-44~       40000    1.91
-##  8 51631 2009_10  female     1        12 White   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          35000-44~       40000    1.36
-##  9 51632 2009_10  male      10       124 Hispan~ &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          65000-74~       70000    2.68
-## 10 51633 2009_10  male      80        NA White   &lt;NA&gt;  Some College Married       15000-19~       17500    1.27
-## # ... with 20,283 more rows, and 66 more variables: HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,
-## #   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
-## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;,
-## #   BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
-## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;, HealthGen &lt;fct&gt;,
-## #   DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;, LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;,
-## #   nBabies &lt;int&gt;, Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;, PhysActive &lt;fct&gt;,
-## #   PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;, TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;,
-## #   Alcohol12PlusYr &lt;fct&gt;, AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
-## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;, AgeRegMarij &lt;int&gt;,
-## #   HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;, SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
-## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;, SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;
+##       ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education   MaritalStatus
+##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;       &lt;fct&gt;        
+##  1 51624 2009_10  male      34       409 White   &lt;NA&gt;  High School Married      
+##  2 51625 2009_10  male       4        49 Other   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  3 51626 2009_10  male      16       202 Black   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  4 51627 2009_10  male      10       131 Black   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  5 51628 2009_10  female    60       722 Black   &lt;NA&gt;  High School Widowed      
+##  6 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th G~ Married      
+##  7 51630 2009_10  female    49       596 White   &lt;NA&gt;  Some Colle~ LivePartner  
+##  8 51631 2009_10  female     1        12 White   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  9 51632 2009_10  male      10       124 Hispan~ &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+## 10 51633 2009_10  male      80        NA White   &lt;NA&gt;  Some Colle~ Married      
+## # ... with 20,283 more rows, and 69 more variables: HHIncome &lt;fct&gt;,
+## #   HHIncomeMid &lt;int&gt;, Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;,
+## #   Work &lt;fct&gt;, Weight &lt;dbl&gt;, Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;,
+## #   BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
+## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;,
+## #   BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;,
+## #   DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
+## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;,
+## #   HealthGen &lt;fct&gt;, DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;,
+## #   LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;, nBabies &lt;int&gt;,
+## #   Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;,
+## #   PhysActive &lt;fct&gt;, PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;,
+## #   TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;, Alcohol12PlusYr &lt;fct&gt;,
+## #   AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
+## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;,
+## #   AgeRegMarij &lt;int&gt;, HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;,
+## #   SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
+## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;,
+## #   SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;
 ```
 ]
 
@@ -830,30 +848,37 @@ NHANES::NHANESraw %&gt;%
 
 ```
 ## # A tibble: 9,916 x 78
-##       ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education    MaritalStatus HHIncome  HHIncomeMid Poverty
-##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;        &lt;fct&gt;         &lt;fct&gt;           &lt;int&gt;   &lt;dbl&gt;
-##  1 51624 2009_10  male      34       409 White   &lt;NA&gt;  High School  Married       25000-34~       30000    1.36
-##  2 51626 2009_10  male      16       202 Black   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          45000-54~       50000    2.27
-##  3 51628 2009_10  female    60       722 Black   &lt;NA&gt;  High School  Widowed       10000-14~       12500    0.69
-##  4 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th Gr~ Married       25000-34~       30000    1.01
-##  5 51630 2009_10  female    49       596 White   &lt;NA&gt;  Some College LivePartner   35000-44~       40000    1.91
-##  6 51633 2009_10  male      80        NA White   &lt;NA&gt;  Some College Married       15000-19~       17500    1.27
-##  7 51635 2009_10  male      80        NA White   &lt;NA&gt;  9 - 11th Gr~ Widowed       15000-19~       17500    1.69
-##  8 51640 2009_10  male      17       208 Hispan~ &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          10000-14~       12500    0.3 
-##  9 51643 2009_10  female    42       514 Black   &lt;NA&gt;  9 - 11th Gr~ Married       35000-44~       40000    2.35
-## 10 51645 2009_10  male      66       795 Mexican &lt;NA&gt;  9 - 11th Gr~ Married       5000-9999        7500    0.41
-## # ... with 9,906 more rows, and 66 more variables: HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,
-## #   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
-## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;,
-## #   BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
-## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;, HealthGen &lt;fct&gt;,
-## #   DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;, LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;,
-## #   nBabies &lt;int&gt;, Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;, PhysActive &lt;fct&gt;,
-## #   PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;, TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;,
-## #   Alcohol12PlusYr &lt;fct&gt;, AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
-## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;, AgeRegMarij &lt;int&gt;,
-## #   HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;, SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
-## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;, SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;
+##       ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education   MaritalStatus
+##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;       &lt;fct&gt;        
+##  1 51624 2009_10  male      34       409 White   &lt;NA&gt;  High School Married      
+##  2 51626 2009_10  male      16       202 Black   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  3 51628 2009_10  female    60       722 Black   &lt;NA&gt;  High School Widowed      
+##  4 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th G~ Married      
+##  5 51630 2009_10  female    49       596 White   &lt;NA&gt;  Some Colle~ LivePartner  
+##  6 51633 2009_10  male      80        NA White   &lt;NA&gt;  Some Colle~ Married      
+##  7 51635 2009_10  male      80        NA White   &lt;NA&gt;  9 - 11th G~ Widowed      
+##  8 51640 2009_10  male      17       208 Hispan~ &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  9 51643 2009_10  female    42       514 Black   &lt;NA&gt;  9 - 11th G~ Married      
+## 10 51645 2009_10  male      66       795 Mexican &lt;NA&gt;  9 - 11th G~ Married      
+## # ... with 9,906 more rows, and 69 more variables: HHIncome &lt;fct&gt;,
+## #   HHIncomeMid &lt;int&gt;, Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;,
+## #   Work &lt;fct&gt;, Weight &lt;dbl&gt;, Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;,
+## #   BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
+## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;,
+## #   BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;,
+## #   DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
+## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;,
+## #   HealthGen &lt;fct&gt;, DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;,
+## #   LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;, nBabies &lt;int&gt;,
+## #   Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;,
+## #   PhysActive &lt;fct&gt;, PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;,
+## #   TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;, Alcohol12PlusYr &lt;fct&gt;,
+## #   AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
+## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;,
+## #   AgeRegMarij &lt;int&gt;, HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;,
+## #   SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
+## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;,
+## #   SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;
 ```
 ]
 
@@ -937,7 +962,7 @@ Using pipes, show the columns for `ID`, `Smoke100` and `SleepHrsNight` for respo
 Save this to a new data frame. How many rows and columns does it have?
 
 ]
-<div class="countdown blink-colon noupdate-15" id="timer_60ada73f" style="bottom:0;left:0;" data-warnwhen="0">
+<div class="countdown blink-colon noupdate-15" id="timer_60aed22e" style="bottom:0;left:0;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">04</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -958,30 +983,37 @@ count: false
 
 ```
 ## # A tibble: 20,293 x 78
-##       ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education    MaritalStatus HHIncome  HHIncomeMid Poverty
-##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;        &lt;fct&gt;         &lt;fct&gt;           &lt;int&gt;   &lt;dbl&gt;
-##  1 51624 2009_10  male      34       409 White   &lt;NA&gt;  High School  Married       25000-34~       30000    1.36
-##  2 51625 2009_10  male       4        49 Other   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          20000-24~       22500    1.07
-##  3 51626 2009_10  male      16       202 Black   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          45000-54~       50000    2.27
-##  4 51627 2009_10  male      10       131 Black   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          20000-24~       22500    0.81
-##  5 51628 2009_10  female    60       722 Black   &lt;NA&gt;  High School  Widowed       10000-14~       12500    0.69
-##  6 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th Gr~ Married       25000-34~       30000    1.01
-##  7 51630 2009_10  female    49       596 White   &lt;NA&gt;  Some College LivePartner   35000-44~       40000    1.91
-##  8 51631 2009_10  female     1        12 White   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          35000-44~       40000    1.36
-##  9 51632 2009_10  male      10       124 Hispan~ &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          65000-74~       70000    2.68
-## 10 51633 2009_10  male      80        NA White   &lt;NA&gt;  Some College Married       15000-19~       17500    1.27
-## # ... with 20,283 more rows, and 66 more variables: HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,
-## #   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
-## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;,
-## #   BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
-## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;, HealthGen &lt;fct&gt;,
-## #   DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;, LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;,
-## #   nBabies &lt;int&gt;, Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;, PhysActive &lt;fct&gt;,
-## #   PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;, TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;,
-## #   Alcohol12PlusYr &lt;fct&gt;, AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
-## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;, AgeRegMarij &lt;int&gt;,
-## #   HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;, SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
-## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;, SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;
+##       ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education   MaritalStatus
+##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;       &lt;fct&gt;        
+##  1 51624 2009_10  male      34       409 White   &lt;NA&gt;  High School Married      
+##  2 51625 2009_10  male       4        49 Other   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  3 51626 2009_10  male      16       202 Black   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  4 51627 2009_10  male      10       131 Black   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  5 51628 2009_10  female    60       722 Black   &lt;NA&gt;  High School Widowed      
+##  6 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th G~ Married      
+##  7 51630 2009_10  female    49       596 White   &lt;NA&gt;  Some Colle~ LivePartner  
+##  8 51631 2009_10  female     1        12 White   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  9 51632 2009_10  male      10       124 Hispan~ &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+## 10 51633 2009_10  male      80        NA White   &lt;NA&gt;  Some Colle~ Married      
+## # ... with 20,283 more rows, and 69 more variables: HHIncome &lt;fct&gt;,
+## #   HHIncomeMid &lt;int&gt;, Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;,
+## #   Work &lt;fct&gt;, Weight &lt;dbl&gt;, Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;,
+## #   BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
+## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;,
+## #   BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;,
+## #   DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
+## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;,
+## #   HealthGen &lt;fct&gt;, DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;,
+## #   LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;, nBabies &lt;int&gt;,
+## #   Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;,
+## #   PhysActive &lt;fct&gt;, PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;,
+## #   TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;, Alcohol12PlusYr &lt;fct&gt;,
+## #   AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
+## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;,
+## #   AgeRegMarij &lt;int&gt;, HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;,
+## #   SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
+## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;,
+## #   SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;
 ```
 ]
 
@@ -1002,30 +1034,37 @@ NHANES::NHANESraw %&gt;%
 
 ```
 ## # A tibble: 2,424 x 78
-##       ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education    MaritalStatus HHIncome  HHIncomeMid Poverty
-##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;        &lt;fct&gt;         &lt;fct&gt;           &lt;int&gt;   &lt;dbl&gt;
-##  1 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th Gr~ Married       25000-34~       30000    1.01
-##  2 51630 2009_10  female    49       596 White   &lt;NA&gt;  Some College LivePartner   35000-44~       40000    1.91
-##  3 51648 2009_10  male      28       338 Mexican &lt;NA&gt;  8th Grade    NeverMarried  10000-14~       12500    0.09
-##  4 51668 2009_10  female    70       842 Black   &lt;NA&gt;  9 - 11th Gr~ Divorced      5000-9999        7500    0.49
-##  5 51673 2009_10  female    30       360 White   &lt;NA&gt;  High School  Married       15000-19~       17500    0.68
-##  6 51677 2009_10  male      33       404 White   &lt;NA&gt;  High School  Married       25000-34~       30000    1.27
-##  7 51678 2009_10  male      60       721 White   &lt;NA&gt;  High School  Married       15000-19~       17500    1.03
-##  8 51680 2009_10  female    60       727 Black   &lt;NA&gt;  Some College NeverMarried  25000-34~       30000    2.59
-##  9 51687 2009_10  male      78       937 White   &lt;NA&gt;  College Grad Married       75000-99~       87500    5   
-## 10 51697 2009_10  male      27       328 Black   &lt;NA&gt;  9 - 11th Gr~ Married       20000-24~       22500    1.58
-## # ... with 2,414 more rows, and 66 more variables: HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,
-## #   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
-## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;,
-## #   BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
-## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;, HealthGen &lt;fct&gt;,
-## #   DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;, LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;,
-## #   nBabies &lt;int&gt;, Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;, PhysActive &lt;fct&gt;,
-## #   PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;, TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;,
-## #   Alcohol12PlusYr &lt;fct&gt;, AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
-## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;, AgeRegMarij &lt;int&gt;,
-## #   HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;, SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
-## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;, SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;
+##       ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education   MaritalStatus
+##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;       &lt;fct&gt;        
+##  1 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th G~ Married      
+##  2 51630 2009_10  female    49       596 White   &lt;NA&gt;  Some Colle~ LivePartner  
+##  3 51648 2009_10  male      28       338 Mexican &lt;NA&gt;  8th Grade   NeverMarried 
+##  4 51668 2009_10  female    70       842 Black   &lt;NA&gt;  9 - 11th G~ Divorced     
+##  5 51673 2009_10  female    30       360 White   &lt;NA&gt;  High School Married      
+##  6 51677 2009_10  male      33       404 White   &lt;NA&gt;  High School Married      
+##  7 51678 2009_10  male      60       721 White   &lt;NA&gt;  High School Married      
+##  8 51680 2009_10  female    60       727 Black   &lt;NA&gt;  Some Colle~ NeverMarried 
+##  9 51687 2009_10  male      78       937 White   &lt;NA&gt;  College Gr~ Married      
+## 10 51697 2009_10  male      27       328 Black   &lt;NA&gt;  9 - 11th G~ Married      
+## # ... with 2,414 more rows, and 69 more variables: HHIncome &lt;fct&gt;,
+## #   HHIncomeMid &lt;int&gt;, Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;,
+## #   Work &lt;fct&gt;, Weight &lt;dbl&gt;, Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;,
+## #   BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
+## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;,
+## #   BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;,
+## #   DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
+## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;,
+## #   HealthGen &lt;fct&gt;, DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;,
+## #   LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;, nBabies &lt;int&gt;,
+## #   Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;,
+## #   PhysActive &lt;fct&gt;, PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;,
+## #   TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;, Alcohol12PlusYr &lt;fct&gt;,
+## #   AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
+## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;,
+## #   AgeRegMarij &lt;int&gt;, HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;,
+## #   SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
+## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;,
+## #   SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;
 ```
 ]
 
@@ -2391,7 +2430,7 @@ class: inverse
 
 ]
 
-<div class="countdown blink-colon noupdate-15" id="timer_60ada594" style="bottom:0;left:0;" data-warnwhen="0">
+<div class="countdown blink-colon noupdate-15" id="timer_60aed02a" style="bottom:0;left:0;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">04</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -2412,30 +2451,37 @@ count: false
 
 ```
 ## # A tibble: 20,293 x 78
-##       ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education    MaritalStatus HHIncome  HHIncomeMid Poverty
-##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;        &lt;fct&gt;         &lt;fct&gt;           &lt;int&gt;   &lt;dbl&gt;
-##  1 51624 2009_10  male      34       409 White   &lt;NA&gt;  High School  Married       25000-34~       30000    1.36
-##  2 51625 2009_10  male       4        49 Other   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          20000-24~       22500    1.07
-##  3 51626 2009_10  male      16       202 Black   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          45000-54~       50000    2.27
-##  4 51627 2009_10  male      10       131 Black   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          20000-24~       22500    0.81
-##  5 51628 2009_10  female    60       722 Black   &lt;NA&gt;  High School  Widowed       10000-14~       12500    0.69
-##  6 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th Gr~ Married       25000-34~       30000    1.01
-##  7 51630 2009_10  female    49       596 White   &lt;NA&gt;  Some College LivePartner   35000-44~       40000    1.91
-##  8 51631 2009_10  female     1        12 White   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          35000-44~       40000    1.36
-##  9 51632 2009_10  male      10       124 Hispan~ &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          65000-74~       70000    2.68
-## 10 51633 2009_10  male      80        NA White   &lt;NA&gt;  Some College Married       15000-19~       17500    1.27
-## # ... with 20,283 more rows, and 66 more variables: HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,
-## #   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
-## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;,
-## #   BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
-## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;, HealthGen &lt;fct&gt;,
-## #   DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;, LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;,
-## #   nBabies &lt;int&gt;, Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;, PhysActive &lt;fct&gt;,
-## #   PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;, TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;,
-## #   Alcohol12PlusYr &lt;fct&gt;, AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
-## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;, AgeRegMarij &lt;int&gt;,
-## #   HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;, SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
-## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;, SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;
+##       ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education   MaritalStatus
+##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;       &lt;fct&gt;        
+##  1 51624 2009_10  male      34       409 White   &lt;NA&gt;  High School Married      
+##  2 51625 2009_10  male       4        49 Other   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  3 51626 2009_10  male      16       202 Black   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  4 51627 2009_10  male      10       131 Black   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  5 51628 2009_10  female    60       722 Black   &lt;NA&gt;  High School Widowed      
+##  6 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th G~ Married      
+##  7 51630 2009_10  female    49       596 White   &lt;NA&gt;  Some Colle~ LivePartner  
+##  8 51631 2009_10  female     1        12 White   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  9 51632 2009_10  male      10       124 Hispan~ &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+## 10 51633 2009_10  male      80        NA White   &lt;NA&gt;  Some Colle~ Married      
+## # ... with 20,283 more rows, and 69 more variables: HHIncome &lt;fct&gt;,
+## #   HHIncomeMid &lt;int&gt;, Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;,
+## #   Work &lt;fct&gt;, Weight &lt;dbl&gt;, Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;,
+## #   BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
+## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;,
+## #   BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;,
+## #   DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
+## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;,
+## #   HealthGen &lt;fct&gt;, DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;,
+## #   LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;, nBabies &lt;int&gt;,
+## #   Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;,
+## #   PhysActive &lt;fct&gt;, PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;,
+## #   TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;, Alcohol12PlusYr &lt;fct&gt;,
+## #   AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
+## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;,
+## #   AgeRegMarij &lt;int&gt;, HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;,
+## #   SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
+## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;,
+## #   SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;
 ```
 ]
 
@@ -2456,31 +2502,37 @@ NHANES::NHANESraw %&gt;%
 
 ```
 ## # A tibble: 20,293 x 80
-##       ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education    MaritalStatus HHIncome  HHIncomeMid Poverty
-##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;        &lt;fct&gt;         &lt;fct&gt;           &lt;int&gt;   &lt;dbl&gt;
-##  1 51624 2009_10  male      34       409 White   &lt;NA&gt;  High School  Married       25000-34~       30000    1.36
-##  2 51625 2009_10  male       4        49 Other   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          20000-24~       22500    1.07
-##  3 51626 2009_10  male      16       202 Black   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          45000-54~       50000    2.27
-##  4 51627 2009_10  male      10       131 Black   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          20000-24~       22500    0.81
-##  5 51628 2009_10  female    60       722 Black   &lt;NA&gt;  High School  Widowed       10000-14~       12500    0.69
-##  6 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th Gr~ Married       25000-34~       30000    1.01
-##  7 51630 2009_10  female    49       596 White   &lt;NA&gt;  Some College LivePartner   35000-44~       40000    1.91
-##  8 51631 2009_10  female     1        12 White   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          35000-44~       40000    1.36
-##  9 51632 2009_10  male      10       124 Hispan~ &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          65000-74~       70000    2.68
-## 10 51633 2009_10  male      80        NA White   &lt;NA&gt;  Some College Married       15000-19~       17500    1.27
-## # ... with 20,283 more rows, and 68 more variables: HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,
-## #   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
-## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;,
-## #   BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
-## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;, HealthGen &lt;fct&gt;,
-## #   DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;, LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;,
-## #   nBabies &lt;int&gt;, Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;, PhysActive &lt;fct&gt;,
-## #   PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;, TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;,
-## #   Alcohol12PlusYr &lt;fct&gt;, AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
-## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;, AgeRegMarij &lt;int&gt;,
-## #   HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;, SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
-## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;, SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;,
-## #   Height_m &lt;dbl&gt;, bmi_new &lt;dbl&gt;
+##       ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education   MaritalStatus
+##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;       &lt;fct&gt;        
+##  1 51624 2009_10  male      34       409 White   &lt;NA&gt;  High School Married      
+##  2 51625 2009_10  male       4        49 Other   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  3 51626 2009_10  male      16       202 Black   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  4 51627 2009_10  male      10       131 Black   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  5 51628 2009_10  female    60       722 Black   &lt;NA&gt;  High School Widowed      
+##  6 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th G~ Married      
+##  7 51630 2009_10  female    49       596 White   &lt;NA&gt;  Some Colle~ LivePartner  
+##  8 51631 2009_10  female     1        12 White   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  9 51632 2009_10  male      10       124 Hispan~ &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+## 10 51633 2009_10  male      80        NA White   &lt;NA&gt;  Some Colle~ Married      
+## # ... with 20,283 more rows, and 71 more variables: HHIncome &lt;fct&gt;,
+## #   HHIncomeMid &lt;int&gt;, Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;,
+## #   Work &lt;fct&gt;, Weight &lt;dbl&gt;, Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;,
+## #   BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
+## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;,
+## #   BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;,
+## #   DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
+## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;,
+## #   HealthGen &lt;fct&gt;, DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;,
+## #   LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;, nBabies &lt;int&gt;,
+## #   Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;,
+## #   PhysActive &lt;fct&gt;, PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;,
+## #   TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;, Alcohol12PlusYr &lt;fct&gt;,
+## #   AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
+## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;,
+## #   AgeRegMarij &lt;int&gt;, HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;,
+## #   SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
+## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;,
+## #   SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;, Height_m &lt;dbl&gt;, bmi_new &lt;dbl&gt;
 ```
 ]
 
@@ -2502,31 +2554,37 @@ NHANES::NHANESraw %&gt;%
 
 ```
 ## # A tibble: 1,661 x 80
-##       ID SurveyYr Gender   Age AgeMonths Race1    Race3 Education MaritalStatus HHIncome    HHIncomeMid Poverty
-##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;    &lt;fct&gt; &lt;fct&gt;     &lt;fct&gt;         &lt;fct&gt;             &lt;int&gt;   &lt;dbl&gt;
-##  1 51625 2009_10  male       4        49 Other    &lt;NA&gt;  &lt;NA&gt;      &lt;NA&gt;          20000-24999       22500    1.07
-##  2 51632 2009_10  male      10       124 Hispanic &lt;NA&gt;  &lt;NA&gt;      &lt;NA&gt;          65000-74999       70000    2.68
-##  3 51642 2009_10  male       7        85 Mexican  &lt;NA&gt;  &lt;NA&gt;      &lt;NA&gt;          &lt;NA&gt;                 NA   NA   
-##  4 51681 2009_10  female     5        64 White    &lt;NA&gt;  &lt;NA&gt;      &lt;NA&gt;          20000-24999       22500    1.09
-##  5 51743 2009_10  male       8        98 Hispanic &lt;NA&gt;  &lt;NA&gt;      &lt;NA&gt;          65000-74999       70000    0.65
-##  6 51753 2009_10  male       3        43 White    &lt;NA&gt;  &lt;NA&gt;      &lt;NA&gt;          55000-64999       60000    2.33
-##  7 51797 2009_10  female     2        33 Hispanic &lt;NA&gt;  &lt;NA&gt;      &lt;NA&gt;          more 99999       100000    5   
-##  8 51802 2009_10  male       2        35 Mexican  &lt;NA&gt;  &lt;NA&gt;      &lt;NA&gt;          &lt;NA&gt;                 NA   NA   
-##  9 51810 2009_10  male       7        93 White    &lt;NA&gt;  &lt;NA&gt;      &lt;NA&gt;          more 99999       100000    5   
-## 10 51811 2009_10  male       5        63 Black    &lt;NA&gt;  &lt;NA&gt;      &lt;NA&gt;          5000-9999          7500    0.12
-## # ... with 1,651 more rows, and 68 more variables: HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,
-## #   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
-## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;,
-## #   BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
-## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;, HealthGen &lt;fct&gt;,
-## #   DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;, LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;,
-## #   nBabies &lt;int&gt;, Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;, PhysActive &lt;fct&gt;,
-## #   PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;, TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;,
-## #   Alcohol12PlusYr &lt;fct&gt;, AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
-## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;, AgeRegMarij &lt;int&gt;,
-## #   HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;, SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
-## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;, SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;,
-## #   Height_m &lt;dbl&gt;, bmi_new &lt;dbl&gt;
+##       ID SurveyYr Gender   Age AgeMonths Race1    Race3 Education MaritalStatus
+##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;    &lt;fct&gt; &lt;fct&gt;     &lt;fct&gt;        
+##  1 51625 2009_10  male       4        49 Other    &lt;NA&gt;  &lt;NA&gt;      &lt;NA&gt;         
+##  2 51632 2009_10  male      10       124 Hispanic &lt;NA&gt;  &lt;NA&gt;      &lt;NA&gt;         
+##  3 51642 2009_10  male       7        85 Mexican  &lt;NA&gt;  &lt;NA&gt;      &lt;NA&gt;         
+##  4 51681 2009_10  female     5        64 White    &lt;NA&gt;  &lt;NA&gt;      &lt;NA&gt;         
+##  5 51743 2009_10  male       8        98 Hispanic &lt;NA&gt;  &lt;NA&gt;      &lt;NA&gt;         
+##  6 51753 2009_10  male       3        43 White    &lt;NA&gt;  &lt;NA&gt;      &lt;NA&gt;         
+##  7 51797 2009_10  female     2        33 Hispanic &lt;NA&gt;  &lt;NA&gt;      &lt;NA&gt;         
+##  8 51802 2009_10  male       2        35 Mexican  &lt;NA&gt;  &lt;NA&gt;      &lt;NA&gt;         
+##  9 51810 2009_10  male       7        93 White    &lt;NA&gt;  &lt;NA&gt;      &lt;NA&gt;         
+## 10 51811 2009_10  male       5        63 Black    &lt;NA&gt;  &lt;NA&gt;      &lt;NA&gt;         
+## # ... with 1,651 more rows, and 71 more variables: HHIncome &lt;fct&gt;,
+## #   HHIncomeMid &lt;int&gt;, Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;,
+## #   Work &lt;fct&gt;, Weight &lt;dbl&gt;, Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;,
+## #   BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
+## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;,
+## #   BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;,
+## #   DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
+## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;,
+## #   HealthGen &lt;fct&gt;, DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;,
+## #   LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;, nBabies &lt;int&gt;,
+## #   Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;,
+## #   PhysActive &lt;fct&gt;, PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;,
+## #   TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;, Alcohol12PlusYr &lt;fct&gt;,
+## #   AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
+## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;,
+## #   AgeRegMarij &lt;int&gt;, HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;,
+## #   SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
+## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;,
+## #   SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;, Height_m &lt;dbl&gt;, bmi_new &lt;dbl&gt;
 ```
 ]
 
@@ -2749,30 +2807,37 @@ count: false
 
 ```
 ## # A tibble: 20,293 x 78
-##       ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education    MaritalStatus HHIncome  HHIncomeMid Poverty
-##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;        &lt;fct&gt;         &lt;fct&gt;           &lt;int&gt;   &lt;dbl&gt;
-##  1 51624 2009_10  male      34       409 White   &lt;NA&gt;  High School  Married       25000-34~       30000    1.36
-##  2 51625 2009_10  male       4        49 Other   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          20000-24~       22500    1.07
-##  3 51626 2009_10  male      16       202 Black   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          45000-54~       50000    2.27
-##  4 51627 2009_10  male      10       131 Black   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          20000-24~       22500    0.81
-##  5 51628 2009_10  female    60       722 Black   &lt;NA&gt;  High School  Widowed       10000-14~       12500    0.69
-##  6 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th Gr~ Married       25000-34~       30000    1.01
-##  7 51630 2009_10  female    49       596 White   &lt;NA&gt;  Some College LivePartner   35000-44~       40000    1.91
-##  8 51631 2009_10  female     1        12 White   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          35000-44~       40000    1.36
-##  9 51632 2009_10  male      10       124 Hispan~ &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          65000-74~       70000    2.68
-## 10 51633 2009_10  male      80        NA White   &lt;NA&gt;  Some College Married       15000-19~       17500    1.27
-## # ... with 20,283 more rows, and 66 more variables: HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,
-## #   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
-## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;,
-## #   BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
-## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;, HealthGen &lt;fct&gt;,
-## #   DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;, LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;,
-## #   nBabies &lt;int&gt;, Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;, PhysActive &lt;fct&gt;,
-## #   PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;, TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;,
-## #   Alcohol12PlusYr &lt;fct&gt;, AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
-## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;, AgeRegMarij &lt;int&gt;,
-## #   HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;, SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
-## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;, SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;
+##       ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education   MaritalStatus
+##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;       &lt;fct&gt;        
+##  1 51624 2009_10  male      34       409 White   &lt;NA&gt;  High School Married      
+##  2 51625 2009_10  male       4        49 Other   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  3 51626 2009_10  male      16       202 Black   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  4 51627 2009_10  male      10       131 Black   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  5 51628 2009_10  female    60       722 Black   &lt;NA&gt;  High School Widowed      
+##  6 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th G~ Married      
+##  7 51630 2009_10  female    49       596 White   &lt;NA&gt;  Some Colle~ LivePartner  
+##  8 51631 2009_10  female     1        12 White   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  9 51632 2009_10  male      10       124 Hispan~ &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+## 10 51633 2009_10  male      80        NA White   &lt;NA&gt;  Some Colle~ Married      
+## # ... with 20,283 more rows, and 69 more variables: HHIncome &lt;fct&gt;,
+## #   HHIncomeMid &lt;int&gt;, Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;,
+## #   Work &lt;fct&gt;, Weight &lt;dbl&gt;, Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;,
+## #   BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
+## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;,
+## #   BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;,
+## #   DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
+## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;,
+## #   HealthGen &lt;fct&gt;, DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;,
+## #   LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;, nBabies &lt;int&gt;,
+## #   Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;,
+## #   PhysActive &lt;fct&gt;, PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;,
+## #   TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;, Alcohol12PlusYr &lt;fct&gt;,
+## #   AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
+## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;,
+## #   AgeRegMarij &lt;int&gt;, HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;,
+## #   SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
+## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;,
+## #   SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;
 ```
 ]
 
@@ -2793,30 +2858,37 @@ NHANES::NHANESraw %&gt;%
 ```
 ## # A tibble: 20,293 x 78
 ## # Groups:   Gender [2]
-##       ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education    MaritalStatus HHIncome  HHIncomeMid Poverty
-##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;        &lt;fct&gt;         &lt;fct&gt;           &lt;int&gt;   &lt;dbl&gt;
-##  1 51624 2009_10  male      34       409 White   &lt;NA&gt;  High School  Married       25000-34~       30000    1.36
-##  2 51625 2009_10  male       4        49 Other   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          20000-24~       22500    1.07
-##  3 51626 2009_10  male      16       202 Black   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          45000-54~       50000    2.27
-##  4 51627 2009_10  male      10       131 Black   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          20000-24~       22500    0.81
-##  5 51628 2009_10  female    60       722 Black   &lt;NA&gt;  High School  Widowed       10000-14~       12500    0.69
-##  6 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th Gr~ Married       25000-34~       30000    1.01
-##  7 51630 2009_10  female    49       596 White   &lt;NA&gt;  Some College LivePartner   35000-44~       40000    1.91
-##  8 51631 2009_10  female     1        12 White   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          35000-44~       40000    1.36
-##  9 51632 2009_10  male      10       124 Hispan~ &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          65000-74~       70000    2.68
-## 10 51633 2009_10  male      80        NA White   &lt;NA&gt;  Some College Married       15000-19~       17500    1.27
-## # ... with 20,283 more rows, and 66 more variables: HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,
-## #   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
-## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;,
-## #   BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
-## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;, HealthGen &lt;fct&gt;,
-## #   DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;, LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;,
-## #   nBabies &lt;int&gt;, Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;, PhysActive &lt;fct&gt;,
-## #   PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;, TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;,
-## #   Alcohol12PlusYr &lt;fct&gt;, AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
-## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;, AgeRegMarij &lt;int&gt;,
-## #   HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;, SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
-## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;, SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;
+##       ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education   MaritalStatus
+##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;       &lt;fct&gt;        
+##  1 51624 2009_10  male      34       409 White   &lt;NA&gt;  High School Married      
+##  2 51625 2009_10  male       4        49 Other   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  3 51626 2009_10  male      16       202 Black   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  4 51627 2009_10  male      10       131 Black   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  5 51628 2009_10  female    60       722 Black   &lt;NA&gt;  High School Widowed      
+##  6 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th G~ Married      
+##  7 51630 2009_10  female    49       596 White   &lt;NA&gt;  Some Colle~ LivePartner  
+##  8 51631 2009_10  female     1        12 White   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  9 51632 2009_10  male      10       124 Hispan~ &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+## 10 51633 2009_10  male      80        NA White   &lt;NA&gt;  Some Colle~ Married      
+## # ... with 20,283 more rows, and 69 more variables: HHIncome &lt;fct&gt;,
+## #   HHIncomeMid &lt;int&gt;, Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;,
+## #   Work &lt;fct&gt;, Weight &lt;dbl&gt;, Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;,
+## #   BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
+## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;,
+## #   BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;,
+## #   DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
+## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;,
+## #   HealthGen &lt;fct&gt;, DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;,
+## #   LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;, nBabies &lt;int&gt;,
+## #   Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;,
+## #   PhysActive &lt;fct&gt;, PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;,
+## #   TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;, Alcohol12PlusYr &lt;fct&gt;,
+## #   AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
+## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;,
+## #   AgeRegMarij &lt;int&gt;, HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;,
+## #   SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
+## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;,
+## #   SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;
 ```
 ]
 
@@ -3060,7 +3132,7 @@ class: inverse
 - In a final pipeline, find the minimum and maximum `PhysActiveDays` for different `Race1`.
 ]
 
-<div class="countdown blink-colon noupdate-15" id="timer_60ada506" style="bottom:0;left:0;" data-warnwhen="0">
+<div class="countdown blink-colon noupdate-15" id="timer_60aed10e" style="bottom:0;left:0;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">07</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -3514,7 +3586,7 @@ tidyr::table4a %&gt;%
  
 ]
 
-<div class="countdown blink-colon noupdate-15" id="timer_60ada59c" style="bottom:0;left:0;" data-warnwhen="0">
+<div class="countdown blink-colon noupdate-15" id="timer_60aed0fc" style="bottom:0;left:0;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">04</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -4111,29 +4183,36 @@ count: false
 
 ```
 ## # A tibble: 7,240 x 60
-##    country     iso2  iso3   year new_sp_m014 new_sp_m1524 new_sp_m2534 new_sp_m3544 new_sp_m4554 new_sp_m5564
-##    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;int&gt;       &lt;int&gt;        &lt;int&gt;        &lt;int&gt;        &lt;int&gt;        &lt;int&gt;        &lt;int&gt;
-##  1 Afghanistan AF    AFG    1980          NA           NA           NA           NA           NA           NA
-##  2 Afghanistan AF    AFG    1981          NA           NA           NA           NA           NA           NA
-##  3 Afghanistan AF    AFG    1982          NA           NA           NA           NA           NA           NA
-##  4 Afghanistan AF    AFG    1983          NA           NA           NA           NA           NA           NA
-##  5 Afghanistan AF    AFG    1984          NA           NA           NA           NA           NA           NA
-##  6 Afghanistan AF    AFG    1985          NA           NA           NA           NA           NA           NA
-##  7 Afghanistan AF    AFG    1986          NA           NA           NA           NA           NA           NA
-##  8 Afghanistan AF    AFG    1987          NA           NA           NA           NA           NA           NA
-##  9 Afghanistan AF    AFG    1988          NA           NA           NA           NA           NA           NA
-## 10 Afghanistan AF    AFG    1989          NA           NA           NA           NA           NA           NA
-## # ... with 7,230 more rows, and 50 more variables: new_sp_m65 &lt;int&gt;, new_sp_f014 &lt;int&gt;, new_sp_f1524 &lt;int&gt;,
-## #   new_sp_f2534 &lt;int&gt;, new_sp_f3544 &lt;int&gt;, new_sp_f4554 &lt;int&gt;, new_sp_f5564 &lt;int&gt;, new_sp_f65 &lt;int&gt;,
-## #   new_sn_m014 &lt;int&gt;, new_sn_m1524 &lt;int&gt;, new_sn_m2534 &lt;int&gt;, new_sn_m3544 &lt;int&gt;, new_sn_m4554 &lt;int&gt;,
-## #   new_sn_m5564 &lt;int&gt;, new_sn_m65 &lt;int&gt;, new_sn_f014 &lt;int&gt;, new_sn_f1524 &lt;int&gt;, new_sn_f2534 &lt;int&gt;,
-## #   new_sn_f3544 &lt;int&gt;, new_sn_f4554 &lt;int&gt;, new_sn_f5564 &lt;int&gt;, new_sn_f65 &lt;int&gt;, new_ep_m014 &lt;int&gt;,
-## #   new_ep_m1524 &lt;int&gt;, new_ep_m2534 &lt;int&gt;, new_ep_m3544 &lt;int&gt;, new_ep_m4554 &lt;int&gt;, new_ep_m5564 &lt;int&gt;,
-## #   new_ep_m65 &lt;int&gt;, new_ep_f014 &lt;int&gt;, new_ep_f1524 &lt;int&gt;, new_ep_f2534 &lt;int&gt;, new_ep_f3544 &lt;int&gt;,
-## #   new_ep_f4554 &lt;int&gt;, new_ep_f5564 &lt;int&gt;, new_ep_f65 &lt;int&gt;, newrel_m014 &lt;int&gt;, newrel_m1524 &lt;int&gt;,
-## #   newrel_m2534 &lt;int&gt;, newrel_m3544 &lt;int&gt;, newrel_m4554 &lt;int&gt;, newrel_m5564 &lt;int&gt;, newrel_m65 &lt;int&gt;,
-## #   newrel_f014 &lt;int&gt;, newrel_f1524 &lt;int&gt;, newrel_f2534 &lt;int&gt;, newrel_f3544 &lt;int&gt;, newrel_f4554 &lt;int&gt;,
-## #   newrel_f5564 &lt;int&gt;, newrel_f65 &lt;int&gt;
+##    country  iso2  iso3   year new_sp_m014 new_sp_m1524 new_sp_m2534 new_sp_m3544
+##    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;int&gt;       &lt;int&gt;        &lt;int&gt;        &lt;int&gt;        &lt;int&gt;
+##  1 Afghani~ AF    AFG    1980          NA           NA           NA           NA
+##  2 Afghani~ AF    AFG    1981          NA           NA           NA           NA
+##  3 Afghani~ AF    AFG    1982          NA           NA           NA           NA
+##  4 Afghani~ AF    AFG    1983          NA           NA           NA           NA
+##  5 Afghani~ AF    AFG    1984          NA           NA           NA           NA
+##  6 Afghani~ AF    AFG    1985          NA           NA           NA           NA
+##  7 Afghani~ AF    AFG    1986          NA           NA           NA           NA
+##  8 Afghani~ AF    AFG    1987          NA           NA           NA           NA
+##  9 Afghani~ AF    AFG    1988          NA           NA           NA           NA
+## 10 Afghani~ AF    AFG    1989          NA           NA           NA           NA
+## # ... with 7,230 more rows, and 52 more variables: new_sp_m4554 &lt;int&gt;,
+## #   new_sp_m5564 &lt;int&gt;, new_sp_m65 &lt;int&gt;, new_sp_f014 &lt;int&gt;,
+## #   new_sp_f1524 &lt;int&gt;, new_sp_f2534 &lt;int&gt;, new_sp_f3544 &lt;int&gt;,
+## #   new_sp_f4554 &lt;int&gt;, new_sp_f5564 &lt;int&gt;, new_sp_f65 &lt;int&gt;,
+## #   new_sn_m014 &lt;int&gt;, new_sn_m1524 &lt;int&gt;, new_sn_m2534 &lt;int&gt;,
+## #   new_sn_m3544 &lt;int&gt;, new_sn_m4554 &lt;int&gt;, new_sn_m5564 &lt;int&gt;,
+## #   new_sn_m65 &lt;int&gt;, new_sn_f014 &lt;int&gt;, new_sn_f1524 &lt;int&gt;,
+## #   new_sn_f2534 &lt;int&gt;, new_sn_f3544 &lt;int&gt;, new_sn_f4554 &lt;int&gt;,
+## #   new_sn_f5564 &lt;int&gt;, new_sn_f65 &lt;int&gt;, new_ep_m014 &lt;int&gt;,
+## #   new_ep_m1524 &lt;int&gt;, new_ep_m2534 &lt;int&gt;, new_ep_m3544 &lt;int&gt;,
+## #   new_ep_m4554 &lt;int&gt;, new_ep_m5564 &lt;int&gt;, new_ep_m65 &lt;int&gt;,
+## #   new_ep_f014 &lt;int&gt;, new_ep_f1524 &lt;int&gt;, new_ep_f2534 &lt;int&gt;,
+## #   new_ep_f3544 &lt;int&gt;, new_ep_f4554 &lt;int&gt;, new_ep_f5564 &lt;int&gt;,
+## #   new_ep_f65 &lt;int&gt;, newrel_m014 &lt;int&gt;, newrel_m1524 &lt;int&gt;,
+## #   newrel_m2534 &lt;int&gt;, newrel_m3544 &lt;int&gt;, newrel_m4554 &lt;int&gt;,
+## #   newrel_m5564 &lt;int&gt;, newrel_m65 &lt;int&gt;, newrel_f014 &lt;int&gt;,
+## #   newrel_f1524 &lt;int&gt;, newrel_f2534 &lt;int&gt;, newrel_f3544 &lt;int&gt;,
+## #   newrel_f4554 &lt;int&gt;, newrel_f5564 &lt;int&gt;, newrel_f65 &lt;int&gt;
 ```
 ]
 
@@ -4254,8 +4333,8 @@ flowers %&gt;%
 - Find the number of observations for each `Gender` and `Race1` group like we did earlier. Can transform this tidy format into an _untidy_ pivot table? This can be useful for presentations and reports. 
 
 ]
-<div class="countdown blink-colon noupdate-15" id="timer_60ada74d" style="bottom:0;left:0;" data-warnwhen="0">
-<code class="countdown-time"><span class="countdown-digits minutes">04</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+<div class="countdown blink-colon noupdate-15" id="timer_60aed13e" style="bottom:0;left:0;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">03</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
 ---
@@ -4393,30 +4472,37 @@ count: false
 
 ```
 ## # A tibble: 20,293 x 78
-##       ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education    MaritalStatus HHIncome  HHIncomeMid Poverty
-##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;        &lt;fct&gt;         &lt;fct&gt;           &lt;int&gt;   &lt;dbl&gt;
-##  1 51624 2009_10  male      34       409 White   &lt;NA&gt;  High School  Married       25000-34~       30000    1.36
-##  2 51625 2009_10  male       4        49 Other   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          20000-24~       22500    1.07
-##  3 51626 2009_10  male      16       202 Black   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          45000-54~       50000    2.27
-##  4 51627 2009_10  male      10       131 Black   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          20000-24~       22500    0.81
-##  5 51628 2009_10  female    60       722 Black   &lt;NA&gt;  High School  Widowed       10000-14~       12500    0.69
-##  6 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th Gr~ Married       25000-34~       30000    1.01
-##  7 51630 2009_10  female    49       596 White   &lt;NA&gt;  Some College LivePartner   35000-44~       40000    1.91
-##  8 51631 2009_10  female     1        12 White   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          35000-44~       40000    1.36
-##  9 51632 2009_10  male      10       124 Hispan~ &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          65000-74~       70000    2.68
-## 10 51633 2009_10  male      80        NA White   &lt;NA&gt;  Some College Married       15000-19~       17500    1.27
-## # ... with 20,283 more rows, and 66 more variables: HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,
-## #   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
-## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;,
-## #   BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
-## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;, HealthGen &lt;fct&gt;,
-## #   DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;, LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;,
-## #   nBabies &lt;int&gt;, Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;, PhysActive &lt;fct&gt;,
-## #   PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;, TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;,
-## #   Alcohol12PlusYr &lt;fct&gt;, AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
-## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;, AgeRegMarij &lt;int&gt;,
-## #   HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;, SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
-## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;, SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;
+##       ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education   MaritalStatus
+##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;       &lt;fct&gt;        
+##  1 51624 2009_10  male      34       409 White   &lt;NA&gt;  High School Married      
+##  2 51625 2009_10  male       4        49 Other   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  3 51626 2009_10  male      16       202 Black   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  4 51627 2009_10  male      10       131 Black   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  5 51628 2009_10  female    60       722 Black   &lt;NA&gt;  High School Widowed      
+##  6 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th G~ Married      
+##  7 51630 2009_10  female    49       596 White   &lt;NA&gt;  Some Colle~ LivePartner  
+##  8 51631 2009_10  female     1        12 White   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  9 51632 2009_10  male      10       124 Hispan~ &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+## 10 51633 2009_10  male      80        NA White   &lt;NA&gt;  Some Colle~ Married      
+## # ... with 20,283 more rows, and 69 more variables: HHIncome &lt;fct&gt;,
+## #   HHIncomeMid &lt;int&gt;, Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;,
+## #   Work &lt;fct&gt;, Weight &lt;dbl&gt;, Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;,
+## #   BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
+## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;,
+## #   BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;,
+## #   DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
+## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;,
+## #   HealthGen &lt;fct&gt;, DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;,
+## #   LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;, nBabies &lt;int&gt;,
+## #   Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;,
+## #   PhysActive &lt;fct&gt;, PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;,
+## #   TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;, Alcohol12PlusYr &lt;fct&gt;,
+## #   AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
+## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;,
+## #   AgeRegMarij &lt;int&gt;, HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;,
+## #   SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
+## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;,
+## #   SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;
 ```
 ]
 
@@ -4686,7 +4772,7 @@ flowers %&gt;%
 - Take a look at the `NHANESraw` variable `HHIncome`. Can you use separate to make a lower income and upper income bracket? 
 
 ]
-<div class="countdown blink-colon noupdate-15" id="timer_60ada44f" style="bottom:0;left:0;" data-warnwhen="0">
+<div class="countdown blink-colon noupdate-15" id="timer_60aed32a" style="bottom:0;left:0;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">04</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 ---
@@ -4824,30 +4910,37 @@ count: false
 
 ```
 ## # A tibble: 20,293 x 78
-##       ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education    MaritalStatus HHIncome  HHIncomeMid Poverty
-##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;        &lt;fct&gt;         &lt;fct&gt;           &lt;int&gt;   &lt;dbl&gt;
-##  1 51624 2009_10  male      34       409 White   &lt;NA&gt;  High School  Married       25000-34~       30000    1.36
-##  2 51625 2009_10  male       4        49 Other   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          20000-24~       22500    1.07
-##  3 51626 2009_10  male      16       202 Black   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          45000-54~       50000    2.27
-##  4 51627 2009_10  male      10       131 Black   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          20000-24~       22500    0.81
-##  5 51628 2009_10  female    60       722 Black   &lt;NA&gt;  High School  Widowed       10000-14~       12500    0.69
-##  6 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th Gr~ Married       25000-34~       30000    1.01
-##  7 51630 2009_10  female    49       596 White   &lt;NA&gt;  Some College LivePartner   35000-44~       40000    1.91
-##  8 51631 2009_10  female     1        12 White   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          35000-44~       40000    1.36
-##  9 51632 2009_10  male      10       124 Hispan~ &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          65000-74~       70000    2.68
-## 10 51633 2009_10  male      80        NA White   &lt;NA&gt;  Some College Married       15000-19~       17500    1.27
-## # ... with 20,283 more rows, and 66 more variables: HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,
-## #   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
-## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;,
-## #   BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
-## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;, HealthGen &lt;fct&gt;,
-## #   DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;, LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;,
-## #   nBabies &lt;int&gt;, Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;, PhysActive &lt;fct&gt;,
-## #   PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;, TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;,
-## #   Alcohol12PlusYr &lt;fct&gt;, AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
-## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;, AgeRegMarij &lt;int&gt;,
-## #   HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;, SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
-## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;, SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;
+##       ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education   MaritalStatus
+##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;       &lt;fct&gt;        
+##  1 51624 2009_10  male      34       409 White   &lt;NA&gt;  High School Married      
+##  2 51625 2009_10  male       4        49 Other   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  3 51626 2009_10  male      16       202 Black   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  4 51627 2009_10  male      10       131 Black   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  5 51628 2009_10  female    60       722 Black   &lt;NA&gt;  High School Widowed      
+##  6 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th G~ Married      
+##  7 51630 2009_10  female    49       596 White   &lt;NA&gt;  Some Colle~ LivePartner  
+##  8 51631 2009_10  female     1        12 White   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  9 51632 2009_10  male      10       124 Hispan~ &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+## 10 51633 2009_10  male      80        NA White   &lt;NA&gt;  Some Colle~ Married      
+## # ... with 20,283 more rows, and 69 more variables: HHIncome &lt;fct&gt;,
+## #   HHIncomeMid &lt;int&gt;, Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;,
+## #   Work &lt;fct&gt;, Weight &lt;dbl&gt;, Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;,
+## #   BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
+## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;,
+## #   BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;,
+## #   DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
+## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;,
+## #   HealthGen &lt;fct&gt;, DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;,
+## #   LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;, nBabies &lt;int&gt;,
+## #   Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;,
+## #   PhysActive &lt;fct&gt;, PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;,
+## #   TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;, Alcohol12PlusYr &lt;fct&gt;,
+## #   AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
+## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;,
+## #   AgeRegMarij &lt;int&gt;, HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;,
+## #   SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
+## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;,
+## #   SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;
 ```
 ]
 
@@ -4901,8 +4994,9 @@ NHANES::NHANESraw %&gt;%
 .panel2-separate-exercise-2-auto[
 
 ```
-## Warning: Expected 2 pieces. Missing pieces filled with `NA` in 2892 rows [33, 39, 41, 94, 96, 99, 111, 112,
-## 121, 122, 135, 142, 143, 148, 157, 158, 170, 173, 174, 178, ...].
+## Warning: Expected 2 pieces. Missing pieces filled with `NA` in 2892 rows [33,
+## 39, 41, 94, 96, 99, 111, 112, 121, 122, 135, 142, 143, 148, 157, 158, 170, 173,
+## 174, 178, ...].
 ## # A tibble: 20,293 x 3
 ##    lower_HHI upper_HHI HHIncomeMid
 ##    &lt;chr&gt;     &lt;chr&gt;           &lt;int&gt;
@@ -4981,7 +5075,7 @@ class: inverse
 
 ]
 
-<div class="countdown blink-colon noupdate-15" id="timer_60ada551" style="bottom:0;left:0;" data-warnwhen="0">
+<div class="countdown blink-colon noupdate-15" id="timer_60aed33f" style="bottom:0;left:0;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">04</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 ---
@@ -4999,30 +5093,37 @@ count: false
 
 ```
 ## # A tibble: 20,293 x 78
-##       ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education    MaritalStatus HHIncome  HHIncomeMid Poverty
-##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;        &lt;fct&gt;         &lt;fct&gt;           &lt;int&gt;   &lt;dbl&gt;
-##  1 51624 2009_10  male      34       409 White   &lt;NA&gt;  High School  Married       25000-34~       30000    1.36
-##  2 51625 2009_10  male       4        49 Other   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          20000-24~       22500    1.07
-##  3 51626 2009_10  male      16       202 Black   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          45000-54~       50000    2.27
-##  4 51627 2009_10  male      10       131 Black   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          20000-24~       22500    0.81
-##  5 51628 2009_10  female    60       722 Black   &lt;NA&gt;  High School  Widowed       10000-14~       12500    0.69
-##  6 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th Gr~ Married       25000-34~       30000    1.01
-##  7 51630 2009_10  female    49       596 White   &lt;NA&gt;  Some College LivePartner   35000-44~       40000    1.91
-##  8 51631 2009_10  female     1        12 White   &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          35000-44~       40000    1.36
-##  9 51632 2009_10  male      10       124 Hispan~ &lt;NA&gt;  &lt;NA&gt;         &lt;NA&gt;          65000-74~       70000    2.68
-## 10 51633 2009_10  male      80        NA White   &lt;NA&gt;  Some College Married       15000-19~       17500    1.27
-## # ... with 20,283 more rows, and 66 more variables: HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,
-## #   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
-## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;,
-## #   BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
-## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;, HealthGen &lt;fct&gt;,
-## #   DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;, LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;,
-## #   nBabies &lt;int&gt;, Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;, PhysActive &lt;fct&gt;,
-## #   PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;, TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;,
-## #   Alcohol12PlusYr &lt;fct&gt;, AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
-## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;, AgeRegMarij &lt;int&gt;,
-## #   HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;, SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
-## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;, SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;
+##       ID SurveyYr Gender   Age AgeMonths Race1   Race3 Education   MaritalStatus
+##    &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;       &lt;fct&gt;        
+##  1 51624 2009_10  male      34       409 White   &lt;NA&gt;  High School Married      
+##  2 51625 2009_10  male       4        49 Other   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  3 51626 2009_10  male      16       202 Black   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  4 51627 2009_10  male      10       131 Black   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  5 51628 2009_10  female    60       722 Black   &lt;NA&gt;  High School Widowed      
+##  6 51629 2009_10  male      26       313 Mexican &lt;NA&gt;  9 - 11th G~ Married      
+##  7 51630 2009_10  female    49       596 White   &lt;NA&gt;  Some Colle~ LivePartner  
+##  8 51631 2009_10  female     1        12 White   &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+##  9 51632 2009_10  male      10       124 Hispan~ &lt;NA&gt;  &lt;NA&gt;        &lt;NA&gt;         
+## 10 51633 2009_10  male      80        NA White   &lt;NA&gt;  Some Colle~ Married      
+## # ... with 20,283 more rows, and 69 more variables: HHIncome &lt;fct&gt;,
+## #   HHIncomeMid &lt;int&gt;, Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;,
+## #   Work &lt;fct&gt;, Weight &lt;dbl&gt;, Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;,
+## #   BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;,
+## #   BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;,
+## #   BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;,
+## #   DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;,
+## #   UrineVol2 &lt;int&gt;, UrineFlow2 &lt;dbl&gt;, Diabetes &lt;fct&gt;, DiabetesAge &lt;int&gt;,
+## #   HealthGen &lt;fct&gt;, DaysPhysHlthBad &lt;int&gt;, DaysMentHlthBad &lt;int&gt;,
+## #   LittleInterest &lt;fct&gt;, Depressed &lt;fct&gt;, nPregnancies &lt;int&gt;, nBabies &lt;int&gt;,
+## #   Age1stBaby &lt;int&gt;, SleepHrsNight &lt;int&gt;, SleepTrouble &lt;fct&gt;,
+## #   PhysActive &lt;fct&gt;, PhysActiveDays &lt;int&gt;, TVHrsDay &lt;fct&gt;, CompHrsDay &lt;fct&gt;,
+## #   TVHrsDayChild &lt;int&gt;, CompHrsDayChild &lt;int&gt;, Alcohol12PlusYr &lt;fct&gt;,
+## #   AlcoholDay &lt;int&gt;, AlcoholYear &lt;int&gt;, SmokeNow &lt;fct&gt;, Smoke100 &lt;fct&gt;,
+## #   SmokeAge &lt;int&gt;, Marijuana &lt;fct&gt;, AgeFirstMarij &lt;int&gt;, RegularMarij &lt;fct&gt;,
+## #   AgeRegMarij &lt;int&gt;, HardDrugs &lt;fct&gt;, SexEver &lt;fct&gt;, SexAge &lt;int&gt;,
+## #   SexNumPartnLife &lt;int&gt;, SexNumPartYear &lt;int&gt;, SameSex &lt;fct&gt;,
+## #   SexOrientation &lt;fct&gt;, WTINT2YR &lt;dbl&gt;, WTMEC2YR &lt;dbl&gt;, SDMVPSU &lt;int&gt;,
+## #   SDMVSTRA &lt;int&gt;, PregnantNow &lt;fct&gt;
 ```
 ]
 
