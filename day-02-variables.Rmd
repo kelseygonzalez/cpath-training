@@ -1015,7 +1015,7 @@ bike_trips <- read_csv("http://bit.ly/capital_trips", n_max = 1000)
 ```
 ]
 .right-column[
-### Day 1 Case Study
+### Day 2 Case Study
 ----
 .small[Use the data from the capital_trips_2016.csv below. These data are from a bikesharing program.
 
