@@ -263,7 +263,7 @@ countdown::countdown(minutes = 3, second = 0,
   color_running_background  = "#003087",
   color_running_text        = "white",
   color_finished_background = "#0072CE",
-  color_finished_text       = "white",)
+  color_finished_text       = "white")
 ```
 ---
 
