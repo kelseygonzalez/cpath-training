@@ -1,0 +1,101 @@
+ID,SurveyYr,Gender,Age,AgeMonths,Race1,Race3,Education,MaritalStatus,HHIncome,HHIncomeMid,Poverty,HomeRooms,HomeOwn,Work
+51624,2009_10,male,34,409,White,NA,High School,Married,25000-34999,30000,1.36,6,Own,NotWorking
+51625,2009_10,male,4,49,Other,NA,NA,NA,20000-24999,22500,1.07,9,Own,NA
+51626,2009_10,male,16,202,Black,NA,NA,NA,45000-54999,50000,2.27,5,Own,NotWorking
+51627,2009_10,male,10,131,Black,NA,NA,NA,20000-24999,22500,0.81,6,Rent,NA
+51628,2009_10,female,60,722,Black,NA,High School,Widowed,10000-14999,12500,0.69,6,Rent,NotWorking
+51629,2009_10,male,26,313,Mexican,NA,9 - 11th Grade,Married,25000-34999,30000,1.01,4,Rent,Working
+51630,2009_10,female,49,596,White,NA,Some College,LivePartner,35000-44999,40000,1.91,5,Rent,NotWorking
+51631,2009_10,female,1,12,White,NA,NA,NA,35000-44999,40000,1.36,5,Rent,NA
+51632,2009_10,male,10,124,Hispanic,NA,NA,NA,65000-74999,70000,2.68,7,Own,NA
+51633,2009_10,male,80,NA,White,NA,Some College,Married,15000-19999,17500,1.27,4,Own,NotWorking
+51634,2009_10,male,10,121,Mexican,NA,NA,NA,20000-24999,22500,0.93,5,Own,NA
+51635,2009_10,male,80,NA,White,NA,9 - 11th Grade,Widowed,15000-19999,17500,1.69,5,Own,NotWorking
+51636,2009_10,male,4,48,Other,NA,NA,NA,25000-34999,30000,1.36,7,Own,NA
+51637,2009_10,female,35,431,White,NA,Some College,Married,NA,NA,NA,NA,NA,Working
+51638,2009_10,male,9,115,White,NA,NA,NA,75000-99999,87500,1.84,6,Rent,NA
+51639,2009_10,male,4,58,Mexican,NA,NA,NA,35000-44999,40000,0.95,6,Rent,NA
+51640,2009_10,male,17,208,Hispanic,NA,NA,NA,10000-14999,12500,0.3,5,Other,Looking
+51641,2009_10,male,13,156,Black,NA,NA,NA,75000-99999,87500,2.91,6,Rent,NA
+51642,2009_10,male,7,85,Mexican,NA,NA,NA,NA,NA,NA,4,Rent,NA
+51643,2009_10,female,42,514,Black,NA,9 - 11th Grade,Married,35000-44999,40000,2.35,6,Rent,NotWorking
+51644,2009_10,male,0,9,White,NA,NA,NA,NA,NA,NA,9,Own,NA
+51645,2009_10,male,66,795,Mexican,NA,9 - 11th Grade,Married,5000-9999,7500,0.41,5,Own,NotWorking
+51646,2009_10,male,8,101,White,NA,NA,NA,55000-64999,60000,2.33,7,Own,NA
+51647,2009_10,female,45,541,White,NA,College Grad,Married,75000-99999,87500,5,6,Own,Working
+51648,2009_10,male,28,338,Mexican,NA,8th Grade,NeverMarried,10000-14999,12500,0.09,4,Other,Working
+51649,2009_10,female,8,107,Black,NA,NA,NA,10000-14999,12500,0.35,7,Rent,NA
+51650,2009_10,female,11,139,Mexican,NA,NA,NA,25000-34999,30000,1.22,5,Rent,NA
+51651,2009_10,female,19,232,Black,NA,NA,NA,20000-24999,22500,0.69,7,Rent,NotWorking
+51652,2009_10,female,1,12,Mexican,NA,NA,NA,25000-34999,30000,1.37,5,Rent,NA
+51653,2009_10,male,44,539,White,NA,High School,Divorced,45000-54999,50000,4.43,4,Rent,Working
+51654,2009_10,male,66,795,White,NA,Some College,Married,25000-34999,30000,2.2,5,Own,NotWorking
+51655,2009_10,female,49,593,Mexican,NA,8th Grade,Married,25000-34999,30000,1.45,5,Rent,Looking
+51656,2009_10,male,58,707,White,NA,College Grad,Divorced,more 99999,100000,5,10,Rent,Working
+51657,2009_10,male,54,654,White,NA,9 - 11th Grade,Married,65000-74999,70000,2.2,6,Rent,Working
+51658,2009_10,female,26,321,Mexican,NA,High School,Married,45000-54999,50000,1.35,5,Rent,Working
+51659,2009_10,female,10,123,White,NA,NA,NA,NA,NA,NA,10,Own,NA
+51660,2009_10,male,32,394,Mexican,NA,8th Grade,NeverMarried,25000-34999,30000,0.97,3,Rent,Working
+51661,2009_10,female,60,722,Mexican,NA,High School,Married,35000-44999,40000,2.75,6,Own,NotWorking
+51662,2009_10,female,44,530,Mexican,NA,9 - 11th Grade,Married,more 99999,100000,3.97,9,Own,Working
+51663,2009_10,female,18,226,Hispanic,NA,NA,NA,20000-24999,22500,0.78,4,Rent,NotWorking
+51664,2009_10,female,53,644,White,NA,College Grad,Married,more 99999,100000,5,9,Own,NotWorking
+51665,2009_10,female,3,47,White,NA,NA,NA,10000-14999,12500,0.66,5,Rent,NA
+51666,2009_10,female,58,700,Mexican,NA,High School,Married,75000-99999,87500,2.03,10,Rent,Looking
+51667,2009_10,male,50,603,White,NA,Some College,NeverMarried,15000-19999,17500,1.24,4,Rent,Looking
+51668,2009_10,female,70,842,Black,NA,9 - 11th Grade,Divorced,5000-9999,7500,0.49,5,Rent,Working
+51669,2009_10,female,65,780,Mexican,NA,8th Grade,Married,15000-19999,17500,0.54,4,Rent,NotWorking
+51670,2009_10,male,22,269,White,NA,College Grad,NeverMarried,45000-54999,50000,0.74,6,Rent,Working
+51671,2009_10,female,9,112,Black,NA,NA,NA,NA,NA,NA,3,Rent,NA
+51672,2009_10,female,27,333,White,NA,9 - 11th Grade,Married,45000-54999,50000,2.04,5,Own,NotWorking
+51673,2009_10,female,30,360,White,NA,High School,Married,15000-19999,17500,0.68,7,Own,Working
+51674,2009_10,female,40,491,White,NA,Some College,Married,NA,NA,NA,NA,NA,Working
+51675,2009_10,female,80,NA,White,NA,9 - 11th Grade,Married,20000-24999,22500,1.72,5,Own,NotWorking
+51676,2009_10,male,27,335,Black,NA,Some College,NeverMarried,75000-99999,87500,2.71,10,Own,NotWorking
+51677,2009_10,male,33,404,White,NA,High School,Married,25000-34999,30000,1.27,11,Own,Working
+51678,2009_10,male,60,721,White,NA,High School,Married,15000-19999,17500,1.03,5,Own,Working
+51679,2009_10,male,16,194,Other,NA,NA,NA,NA,NA,NA,7,Own,NotWorking
+51680,2009_10,female,60,727,Black,NA,Some College,NeverMarried,25000-34999,30000,2.59,3,Rent,Working
+51681,2009_10,female,5,64,White,NA,NA,NA,20000-24999,22500,1.09,7,Own,NA
+51682,2009_10,male,11,139,White,NA,NA,NA,20000-24999,22500,1.31,13,Own,NA
+51683,2009_10,female,35,420,White,NA,Some College,Married,75000-99999,87500,4.1,7,Own,NotWorking
+51684,2009_10,female,4,55,Mexican,NA,NA,NA,15000-19999,17500,0.68,6,Own,NA
+51685,2009_10,female,56,677,White,NA,College Grad,Married,75000-99999,87500,5,10,Own,NotWorking
+51686,2009_10,male,1,20,Mexican,NA,NA,NA,20000-24999,22500,0.78,5,Rent,NA
+51687,2009_10,male,78,937,White,NA,College Grad,Married,75000-99999,87500,5,5,Own,NotWorking
+51688,2009_10,male,0,3,White,NA,NA,NA,75000-99999,87500,3.63,7,Other,NA
+51689,2009_10,female,8,104,Mexican,NA,NA,NA,55000-64999,60000,2.33,6,Own,NA
+51690,2009_10,female,63,760,Hispanic,NA,9 - 11th Grade,Married,35000-44999,40000,1.59,4,Rent,Working
+51691,2009_10,female,57,694,White,NA,High School,Married,NA,NA,NA,9,Own,Working
+51692,2009_10,male,54,655,Hispanic,NA,College Grad,Divorced,55000-64999,60000,3.28,3,Rent,NotWorking
+51693,2009_10,female,70,846,Black,NA,9 - 11th Grade,NeverMarried,NA,NA,NA,5,Rent,Working
+51694,2009_10,male,38,458,White,NA,Some College,Married,20000-24999,22500,1.15,6,Own,Working
+51695,2009_10,male,8,104,White,NA,NA,NA,65000-74999,70000,3.55,5,Own,NA
+51696,2009_10,male,54,657,Black,NA,College Grad,Widowed,15000-19999,17500,1.39,4,Rent,Working
+51697,2009_10,male,27,328,Black,NA,9 - 11th Grade,Married,20000-24999,22500,1.58,4,Rent,NotWorking
+51698,2009_10,male,7,90,Hispanic,NA,NA,NA,65000-74999,70000,2.68,7,Own,NA
+51699,2009_10,female,26,320,Mexican,NA,High School,LivePartner,25000-34999,30000,1.13,2,Rent,Working
+51700,2009_10,male,6,78,Mexican,NA,NA,NA,20000-24999,22500,0.78,3,Rent,NA
+51701,2009_10,male,36,434,White,NA,9 - 11th Grade,Separated,65000-74999,70000,2.2,6,Rent,NotWorking
+51702,2009_10,male,44,539,White,NA,9 - 11th Grade,Married,35000-44999,40000,1.81,10,Rent,Working
+51703,2009_10,male,17,215,Black,NA,NA,NA,20000-24999,22500,1.61,4,Rent,NotWorking
+51704,2009_10,male,54,655,Mexican,NA,8th Grade,Married,55000-64999,60000,2.13,9,Own,Working
+51705,2009_10,female,25,310,Mexican,NA,9 - 11th Grade,Married,NA,NA,NA,6,Rent,NotWorking
+51706,2009_10,female,2,32,Mexican,NA,NA,NA,25000-34999,30000,1.32,5,Rent,NA
+51707,2009_10,female,64,771,Other,NA,8th Grade,Widowed,10000-14999,12500,0.69,4,Rent,NotWorking
+51708,2009_10,female,39,477,White,NA,9 - 11th Grade,Married,25000-34999,30000,1.22,9,Own,NotWorking
+51709,2009_10,male,40,480,Mexican,NA,9 - 11th Grade,Married,35000-44999,40000,1.32,6,Own,NotWorking
+51710,2009_10,female,26,319,White,NA,College Grad,Married,75000-99999,87500,5,4,Own,Working
+51711,2009_10,female,59,718,Other,NA,8th Grade,Widowed,20000-24999,22500,1.37,4,Rent,NotWorking
+51712,2009_10,female,74,899,Mexican,NA,High School,Widowed,20000-24999,22500,1.65,4,Own,NotWorking
+51713,2009_10,male,80,NA,White,NA,Some College,Married,20000-24999,22500,1.37,4,Rent,NotWorking
+51714,2009_10,male,58,698,White,NA,Some College,Divorced,25000-34999,30000,2.77,5,Own,NotWorking
+51715,2009_10,male,49,593,Mexican,NA,9 - 11th Grade,Married,NA,NA,NA,10,Own,NotWorking
+51716,2009_10,female,7,91,White,NA,NA,NA,5000-9999,7500,0.44,5,Rent,NA
+51717,2009_10,female,0,4,White,NA,NA,NA,more 99999,100000,5,7,Own,NA
+51718,2009_10,female,51,614,Mexican,NA,College Grad,Married,65000-74999,70000,3.17,5,Own,Working
+51719,2009_10,male,17,211,White,NA,NA,NA,more 99999,100000,5,13,Own,Working
+51720,2009_10,male,12,152,Other,NA,NA,NA,35000-44999,40000,1.81,8,Own,NA
+51721,2009_10,female,40,490,Mexican,NA,9 - 11th Grade,Widowed,5000-9999,7500,0.55,5,Rent,NotWorking
+51722,2009_10,male,16,199,White,NA,NA,NA,more 99999,100000,5,8,Own,NotWorking
+51723,2009_10,male,28,336,Black,NA,Some College,LivePartner,25000-34999,30000,1.39,3,Rent,Working
